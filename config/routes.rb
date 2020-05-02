@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   root 'users/products#top' 
  
-  devise_for :admins
-  devise_for :users
+  devise_for :admins, controllers: {
+    sessions: "admins/sessions",
+    passwords: "admins/passwords",
+  }
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    registrations: "users/registrations"
+  }
   
   namespace :users do
     resources :users, only: [:show, :withdraw_confirm, :withdraw, :edit, :update]
