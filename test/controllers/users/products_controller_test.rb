@@ -1,19 +1,7 @@
 require 'test_helper'
 
-class ProductsControllerTest < ActionDispatch::IntegrationTest
-  test "should get top" do
-    get products_top_url
-    assert_response :success
-  end
-
-  test "should get index" do
-    get products_index_url
-    assert_response :success
-  end
-
-  test "should get show" do
-    get products_show_url
-    assert_response :success
-  end
-
+class Users::ProductsControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 end
