@@ -25,7 +25,7 @@
                 <input type="text" class="form-control"  placeholder="Search">
               <% elsif user_signed_in? %>
                 <li class="nav-list-item">
-                  <%= "ようこそ、" + current.user.last_name + current.user.first_name + "さん！" %>
+                  <%= "ようこそ、" + current_user.last_name + current_user.first_name + "さん！" %>
                 </li>
                 <li class="nav-list-item">
                   <%= link_to "マイページ", users_user_path(current_user.id) %>
