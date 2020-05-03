@@ -1,0 +1,12 @@
+this is user top page<br>
+<%= link_to "log_in", new_user_session_path %><br>
+<%= link_to "sign_up", new_user_registration_path %>
+
+<User Info>
+<% if user_signed_in? %>
+    You're signed in.<br>
+    <%= current_user.last_name %>
+    <%= current_user.first_name %>
+<% else %>
+    You're not signed in.
+<% end %>
