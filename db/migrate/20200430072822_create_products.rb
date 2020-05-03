@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.integer :genre_id, null: false
       t.string :name, null: false
       t.string :image_id
-      t.text :description, null: false, default: "商品説明"
+      t.text :description, null: false
       t.integer :price, null: false
       t.boolean :is_active, null: false, default: true
       
