@@ -1,1 +1,14 @@
-<h1>users/products#index</h1>
+<div class="row">
+    <div class="col-xs-3">
+        <% render 'users/products/genre_index' %>
+    </div>
+    <div class="col-xs-9">
+        <h1>商品一覧</h1>
+        （全<%= Product.count %> 件）<br>
+        <% @products.each do |product| %>
+            <%= attachment_image_tag(product, :image, :fill, 40, 40, fallback:"no_image.jpg") %><br>
+            商品名:<%= product.name %><br>
+            <%= product.price %>円<br>
+        <% end %>
+    </div>
+</div>
