@@ -17,7 +17,7 @@ class Admins::ProductsController < ApplicationController
   end
 
   def create
-    @product =Product.new(product_params)
+    @product = Product.new(product_params)
     if @product.save
       redirect_to admins_product_path(@product), notice: "商品登録完了！"
     end

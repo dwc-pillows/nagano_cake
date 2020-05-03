@@ -27,7 +27,7 @@
       <div class="field">
         <tr>
           <td>ジャンル</td>
-          <td><%= f.select :genre_id, ['ケーキ', 'プリン','焼き菓子','キャンディ'], {include_blank: '--選択してください--'} %></td>
+          <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: '--選択してください--' %></td>
         </tr>
       </div>
       <div class="field">
@@ -39,7 +39,7 @@
       <div class="field">
         <tr>
           <td>販売ステータス</td>
-          <td><%= f.select :is_active, ['売切れ', '販売中'], {include_blank: '--選択してください--'} %></td>
+          <td><%= f.select :is_active, [["売切れ", false],["販売中", true]], include_blank: '--選択してください--' %></td>
           
         </tr>
       </div>
