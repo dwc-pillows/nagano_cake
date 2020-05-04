@@ -1,0 +1,9 @@
+this is admin top page<br>
+<%= link_to "log_in", new_admin_session_path %>
+
+<User Info>
+<% if admin_signed_in? %>
+    Admin signed in.
+<% else %>
+    Admin not signed in.
+<% end %>
