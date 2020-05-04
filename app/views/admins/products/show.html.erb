@@ -1,1 +1,46 @@
-<h1>admin/products#show</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h2>商品詳細</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= attachment_image_tag(@product, :image, :fill, 40, 40, fallback:"no_image.jpg") %>
+    </div>
+    <div class="col-xs-4">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>商品名</td>
+            <td><strong><%= @product.name %></strong></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+            <td><strong><%= @product.description %></strong></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><strong><%= @product.genre.name %></strong></td>
+          </tr>
+          <tr>
+            <td>税込価格（税抜価格）</td>
+            <td><strong><%= (@product.price * 1.1).floor %>（<%= @product.price %>）</strong> 円</td>
+          </tr>
+          <tr>
+            <td>販売ステータス</td>
+            <td><%= @product.is_active ? '販売中' : '売り切れ' %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-9"></div>
+      <div class="col-xs-2">
+        <%= link_to "編集する", edit_admins_product_path(@product), class:"btn btn-primary" %>
+      </div>
+    </div>
+
+  </div>
+</div>
