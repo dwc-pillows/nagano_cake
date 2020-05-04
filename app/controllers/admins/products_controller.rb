@@ -10,6 +10,7 @@ class Admins::ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
 
   end
   
@@ -25,11 +26,16 @@ class Admins::ProductsController < ApplicationController
   end
 
   def edit
-
+    @product = Product.find(params[:id])
   end
 
   def update
-    
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to admins_product_path(@product), notice: "商品編集完了！"
+    else
+      render edit_admins_product_path
+    end
   end
 
   private
