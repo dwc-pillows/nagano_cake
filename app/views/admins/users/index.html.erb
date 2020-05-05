@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h2>会員一覧</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="active">
+            <td><strong>会員ID</strong></td>
+            <td><strong>氏名</strong></td>
+            <td><strong>メールアドレス</strong></td>
+            <td><strong>ステータス</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= link_to admins_user_path(user) do %>
+                    <u><%= user.last_name %> <%= user.first_name %></u>
+                  <% end %>
+              </td>
+              <td><%= user.email %></td>
+              <td>
+              <% if user.is_active? %>
+                <span class="label label-primary">有効会員</span>
+              <% else %>
+                <span class="label label-danger">退会済み</span>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
