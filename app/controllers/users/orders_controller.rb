@@ -24,5 +24,4 @@ class Users::OrdersController < ApplicationController
 
   end
 
-  def 
 end
