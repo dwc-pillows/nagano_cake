@@ -2,6 +2,7 @@
   <h2>ショッピングカート</h2>
   <div class="btn-box text-right">
   　<%= link_to "カートを空にする", users_cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
+    <%# URLのパスが思い通りにリンクされていない。後ほど修正 %>
   </div>
   <div class="cart-item-table row">
     <table class="table genre-index table-bordered">
@@ -18,10 +19,13 @@
         <% @cart_items.each do |cart_item| %>
         　<tr>
             <td><%= cart_item.product.name %></td><%# 商品名 %>
-            <td><%= (cart_item.product.price * 1.1).to_i %></td><%# 単価(税込) %>
-            <td><%= cart_item.amount %></td><%# 数量 %>
+            <td><%= (cart_item.product.price * 1.1).to_i.to_s(:delimited) %></td><%# 単価(税込) %>
             <td>
-              <%= (cart_item.product.price * 1.1 * cart_item.amount).to_i %><%# 小計 %>
+              <%= cart_item.amount %>
+              <%# カート編集機能が作成されていない。後ほど修正 %>
+            </td><%# 数量 %>
+            <td>
+              <%= (cart_item.product.price * 1.1 * cart_item.amount).to_i.to_s(:delimited) %><%# 小計 %>
             </td>
             <td><%= link_to "削除する", users_cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger" %></td>
         　</tr>
@@ -39,11 +43,11 @@
           <tr>
             <td>合計金額<td>
             <td>円</td>
+            <%# 合計金額が未定義。後ほど修正 %>
           </tr>
         </tbody>
       </table>
     </div>
-    <%# 合計金額の入力欄。modelで計算結果を定義して入力 %>
   </div>
   <div class="row">
     <div class="col-xs-4 col-xs-offset-4">

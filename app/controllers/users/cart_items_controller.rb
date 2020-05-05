@@ -1,9 +1,7 @@
 class Users::CartItemsController < ApplicationController
 
   def index
-
     @cart_items = current_user.cart_items
-
   end
 
   def create
