@@ -15,8 +15,8 @@ class Users::CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     @cart_item.update(cart_item_params)
     @user = User.find(current_user.id)
-    render "index"
-
+    @cart_items = current_user.cart_items
+    render :index
   end
 
   def destroy
