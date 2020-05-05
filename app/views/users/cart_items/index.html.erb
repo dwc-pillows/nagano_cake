@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>ショッピングカート</h2>
+  <div class="btn-box text-right">
+  　<%= link_to "カートを空にする", users_cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
+    <%# URLのパスが思い通りにリンクされていない。後ほど修正 %>
+  </div>
+  <div class="cart-item-table row">
+    <table class="table genre-index table-bordered">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+        　<tr>
+            <td><%= cart_item.product.name %></td><%# 商品名 %>
+            <td><%= (cart_item.product.price * 1.1).to_i.to_s(:delimited) %></td><%# 単価(税込) %>
+            <td>
+              <%= cart_item.amount %>
+              <%# カート編集機能が作成されていない。後ほど修正 %>
+            </td><%# 数量 %>
+            <td>
+              <%= (cart_item.product.price * 1.1 * cart_item.amount).to_i.to_s(:delimited) %><%# 小計 %>
+            </td>
+            <td><%= link_to "削除する", users_cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger" %></td>
+        　</tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-xs-8">
+      <%= link_to "買い物を続ける", users_products_path, class:"btn btn-primary" %>
+    </div>
+    <div class="col-xs-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>合計金額<td>
+            <td>円</td>
+            <%# 合計金額が未定義。後ほど修正 %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <%= link_to "情報入力に進む", new_users_order_path, class:"btn btn-success btn-lg" %>
+    </div>
+  </div>
+</div>
