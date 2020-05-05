@@ -4,7 +4,7 @@
             <% render 'users/products/genre_index' %>
         </div>
         <div class="col-xs-9">
-            <%= attachment_image_tag(@product, :image, :fill, 40, 40, fallback:"no_image.jpg") %><br>
+            <%= attachment_image_tag(@product, :image, :fill, 40, 40, fallback:"no_image.jpg",size: '40x40') %><br>
             <h1>商品名:<%= @product.name %></h1><br>
             <%= @product.description %><br>
             <%= @product.price %>円<br>

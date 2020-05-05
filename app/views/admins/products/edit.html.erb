@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xs-4">
       <div class="field">
-        <%=attachment_image_tag(@product, :image, :fill, 500, 500, format: 'jpeg', fallback: "no_image.jpg", size: '200×200') %>
+        <%=attachment_image_tag(@product, :image, :fill, 500, 500, format: 'jpeg', fallback: "no_image.jpg", size: '500×500') %>
         <%= f.attachment_field :image, class: "product_image" %>
       </div>
     </div>
