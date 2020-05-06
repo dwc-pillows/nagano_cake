@@ -1,7 +1,7 @@
 class Admins::ProductsController < ApplicationController
 
   def top
-
+    @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order
   end
 
   def index
