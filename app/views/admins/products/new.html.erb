@@ -5,8 +5,8 @@
    
     <div class="col-xs-4">
       <div class="form-group block-content">
-        <%=attachment_image_tag(@product, :image, format: 'jpeg', fallback: "no_image.jpg", class: "img-responsive") %>
-        <%= f.attachment_field :image %>
+        <%=attachment_image_tag(@product, :image, :fill, 300, 200, format: 'jpeg', fallback: "no_image.jpg", id: "img", class: "img-responsive") %>
+        <%= f.attachment_field :image, class: "input-sm" %>
       </div>
     </div>
 
