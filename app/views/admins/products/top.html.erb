@@ -1,9 +1,16 @@
-this is admin top page<br>
-<%= link_to "log_in", new_admin_session_path %>
+<div class="container">
+  <h2>管理者画面</h2><h2>
+</div>
 
-<User Info>
-<% if admin_signed_in? %>
-    Admin signed in.
-<% else %>
-    Admin not signed in.
-<% end %>
+<div class="container">
+  <table>
+    <tr>
+    <td><h3>本日の注文件数</h3></td>
+    <td>
+      <%= link_to admins_orders_path do %> 
+      <h3><%= @orders.count %></h3>
+      <% end %>
+    </td>
+    <td><h3>件</h3></td>
+  </table>
+</div>

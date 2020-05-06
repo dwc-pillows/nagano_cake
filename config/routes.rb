@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'users/products#top' 
- 
+  root 'users/products#top'
+
   devise_for :admins, controllers: {
     sessions: "admins/sessions",
     passwords: "admins/passwords",
@@ -10,16 +10,18 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     registrations: "users/registrations"
   }
-  
+
   namespace :users do
-    resources :users, only: [:show, :withdraw_confirm, :withdraw, :edit, :update]
+    resources :users, only: [:show, :edit, :update]
+    get "/users", to: "users#withdraw_confirm", as: "withdraw_confirm"
+    patch "/users", to: "users#withdraw", as: "withdraw"
+    resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :update, :destroy]
-    delete '/cart_items', to: 'cart_items#destroy_all'
+    delete '/cart_items', to: 'cart_items#destroy_all', as:'cart_items_destroy_all'
     resources :orders, only: [:new, :create, :index, :show]
-    get '/orders/:id/confirm', to: 'orders#confirm' 
+    get '/orders/:id/confirm', to: 'orders#confirm'
     get '/orders/thanks', to: 'orders#thanks'
-    resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
   end
 
   namespace :admins do
