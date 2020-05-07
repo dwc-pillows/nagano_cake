@@ -5,9 +5,9 @@
       <%= form_for [:admins, @genre] do |f| %>
         <%= f.label :name, "ジャンル", class: "genre-form" %>
         <%= f.text_field :name , class: "genre-form" %>
-        <%= f.radio_button :is_active, :"有効", checked: true, class: "genre-form" %>
+        <%= f.radio_button :is_active, :true, checked: true, class: "genre-form" %>
         <%= f.label :is_active, "有効",class: "genre-form" %>
-        <%= f.radio_button :is_active, :"無効", checked: false, class: "genre-form" %>
+        <%= f.radio_button :is_active, :false, checked: false, class: "genre-form" %>
         <%= f.label :is_active, "無効",class: "genre-form" %>
         <%= f.submit "変更を保存する", class:"btn btn-info" %>
       <% end %>
