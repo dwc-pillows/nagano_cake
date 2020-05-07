@@ -1,6 +1,8 @@
 class Users::UsersController < ApplicationController
 
   before_action :set_user, except: [:withdraw, :withdraw_confirm]
+  before_action :authenticate_user!
+  before_action :admin_block
 
   # 退会済ユーザーは入れない様にする
   before_action :user_is_deleted
@@ -54,6 +56,12 @@ class Users::UsersController < ApplicationController
     if user_signed_in? && current_user.is_active == false
       flash[:notice] = "退会済ユーザーアカウントです"
       redirect_to root_path
+    end
+  end
+
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
     end
   end
 

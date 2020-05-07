@@ -1,4 +1,7 @@
 class Users::OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_block
+
 
   def new
 
@@ -9,7 +12,7 @@ class Users::OrdersController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def confirm
@@ -22,6 +25,14 @@ class Users::OrdersController < ApplicationController
 
   def thanks
 
+  end
+
+  private
+
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
+    end
   end
 
 end
