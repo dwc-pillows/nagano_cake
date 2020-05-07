@@ -1,5 +1,6 @@
 class Admins::GenresController < ApplicationController
   before_action :authenticate_admin!
+  before_action :user_block
 
   def index
     @genre = Genre.new
@@ -38,6 +39,12 @@ class Admins::GenresController < ApplicationController
   private
   def genre_params
     params.require(:genre).permit(:name, :is_active)
+  end
+
+  def user_block
+    if user_signed_in?
+      redirect_to root_path
+    end
   end
 
 end

@@ -1,5 +1,6 @@
 class Admins::ProductsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :user_block
 
   def top
     @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order
@@ -42,6 +43,12 @@ class Admins::ProductsController < ApplicationController
   private
   def product_params
   	params.require(:product).permit(:genre_id, :name, :image, :description, :price, :is_active)
+  end
+
+  def user_block
+    if user_signed_in?
+      redirect_to root_path
+    end
   end
 
 end
