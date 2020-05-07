@@ -1,4 +1,14 @@
 <div class="container">
+  <!-- エラーメッセージ表示-->
+  <% if @product.errors.any? %>
+    <h3><%= @product.errors.count %>error occurrence</h3>
+    <ul>
+      <% @product.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <!-- エラーメッセージ表示-->
   <h2>商品編集</h2> 
   <%= form_for [:admins, @product], html: { class: "form-horizontal" } do |f| %>
   <div class="row">
