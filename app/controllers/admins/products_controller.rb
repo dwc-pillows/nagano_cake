@@ -24,6 +24,8 @@ class Admins::ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       redirect_to admins_product_path(@product), notice: "商品登録完了！"
+    else
+      render "new"
     end
   end
 
@@ -36,7 +38,7 @@ class Admins::ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to admins_product_path(@product), notice: "商品編集完了！"
     else
-      render edit_admins_product_path
+      render "edit"
     end
   end
 

@@ -14,7 +14,7 @@ class Admins::GenresController < ApplicationController
       redirect_to admins_genres_path, notice: "ジャンルが追加されました"
       #保存された場合の移動先を指定。
     else
-      @genre = Grnre.new(genre_params)
+      @genre = Genre.new(genre_params)
       @genres = Genre.all
       flash[:notice] = "error：ジャンル名が入力されていません"
       render "index"
