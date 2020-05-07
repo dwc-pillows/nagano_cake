@@ -1,4 +1,5 @@
 class Users::ProductsController < ApplicationController
+  before_action :admin_block
 
   def top
 
@@ -23,6 +24,14 @@ class Users::ProductsController < ApplicationController
     if items.pluck(:product_id).include?(@cart_item.product_id)
       flash[:notice] = "商品はカートに追加済です"
       redirect_back(fallback_location: root_path)
+    end
+  end
+
+  private
+
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
     end
   end
 
