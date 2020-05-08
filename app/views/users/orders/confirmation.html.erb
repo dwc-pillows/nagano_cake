@@ -36,12 +36,12 @@
               <td><%= @order.postage %></td>
             </tr>
             <tr>
-              <td class="active">商品合計</td>
+              <td class="active">合計金額</td>
               <td><%= current_user.cart_items_sum.to_s(:delimited) %></td>
             </tr>
             <tr>
               <td class="active">請求金額</td>
-              <td><%= @order.total_price.to_s(:delimited) %></td>
+              <td><%= (current_user.cart_items_sum + @order.postage).to_s(:delimited) %></td>
             </tr>
           </table>
         </div>

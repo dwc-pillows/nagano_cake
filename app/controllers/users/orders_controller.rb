@@ -2,7 +2,7 @@ class Users::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_block
 
-
+# 新規注文作成ページ(GET)
   def new
     @order = current_user.orders.new
     @deliveries = current_user.deliveries
@@ -25,10 +25,10 @@ class Users::OrdersController < ApplicationController
       @delivery = current_user.deliveries.new
     end
 
-    @order.total_price = current_user.cart_items_sum
+    @order.total_price = 0
     @order.save
 
-    redirect_to users_confirm_order_path(@order)
+    redirect_to users_confirmation_order_path(@order)
   end
 
 # 注文確認画面(GET)
@@ -57,13 +57,12 @@ class Users::OrdersController < ApplicationController
 
 # サンクスページ(GET)
   def thanks
-
   end
 
 
 # 注文履歴一覧ページ (GET)
   def index
-
+    @orders = current_user.orders
   end
 
 # 注文履歴詳細ページ(GET)

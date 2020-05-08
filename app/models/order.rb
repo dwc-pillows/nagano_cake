@@ -4,8 +4,10 @@ class Order < ApplicationRecord
 
   enum paymethod: {"クレジットカード": 0, "銀行振り込み": 1}
   def total_price
-    user.cart_items_sum + postage
-  end
-  def confirmed
+    total = 0
+    order_products.each do |order_product|
+      total += order_product.taxed_product_price * order_product.amount
+    end
+    total + postage
   end
 end
