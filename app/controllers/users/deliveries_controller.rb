@@ -34,14 +34,14 @@ class Users::DeliveriesController < ApplicationController
   end
 
   private
-    def delivery_params
+  def delivery_params
       params.require(:delivery).permit(:user_id ,:zip_code, :address, :name)
     end
 
-    def admin_block
-      if admin_signed_in?
-        redirect_to admins_path
-      end
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
     end
+  end
 
 end
