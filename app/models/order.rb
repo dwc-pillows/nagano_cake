@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   def total_price
     total = 0
     order_products.each do |order_product|
-      total += order_product.taxed_product_price * order_product.amount
+      total += order_product.subtotal
     end
     total + postage
   end

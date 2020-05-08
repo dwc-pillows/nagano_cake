@@ -67,7 +67,7 @@ class Users::OrdersController < ApplicationController
 
 # 注文履歴詳細ページ(GET)
   def show
-    
+    @order = Order.find(params[:id])
   end
 
 
