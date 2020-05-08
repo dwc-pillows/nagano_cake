@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get '/orders/:id/confirm', to: 'orders#confirmation',as: 'confirmation_order'
     # 注文確定アクション
     post '/orders/:id/confirm', to: 'orders#confirm', as: 'confirm_order'
-    get '/orders/thanks', to: 'orders#thanks'
+    get '/thanks', to: 'orders#thanks'
   end
 
   namespace :admins do

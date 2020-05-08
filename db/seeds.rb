@@ -111,5 +111,5 @@ end
 
 # order_productの支払い金額（taxed_product_priceを計算させる）
 OrderProduct.all.each do |order_product|
-  order_product.update( taxed_product_price: order_product.product.price*order_product.amount)
+  order_product.update(taxed_product_price: order_product.product.taxed_price)
 end
