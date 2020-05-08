@@ -1,5 +1,8 @@
 class Users::OrdersController < ApplicationController
-# 新規注文作成画面(GET)
+  before_action :authenticate_user!
+  before_action :admin_block
+
+
   def new
     @order = current_user.orders.new
     @deliveries = current_user.deliveries
@@ -73,6 +76,14 @@ class Users::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:user_id, :pay_method, :zip_code, :address, :name)
+  end
+
+  private
+
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
+    end
   end
 
 end

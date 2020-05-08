@@ -1,5 +1,6 @@
 class Admins::GenresController < ApplicationController
-
+  before_action :authenticate_admin!
+  before_action :user_block
 
   def index
     @genre = Genre.new
@@ -13,7 +14,7 @@ class Admins::GenresController < ApplicationController
       redirect_to admins_genres_path, notice: "ジャンルが追加されました"
       #保存された場合の移動先を指定。
     else
-      @genre = Grnre.new(genre_params)
+      @genre = Genre.new(genre_params)
       @genres = Genre.all
       flash[:notice] = "error：ジャンル名が入力されていません"
       render "index"
@@ -38,6 +39,12 @@ class Admins::GenresController < ApplicationController
   private
   def genre_params
     params.require(:genre).permit(:name, :is_active)
+  end
+
+  def user_block
+    if user_signed_in?
+      redirect_to root_path
+    end
   end
 
 end

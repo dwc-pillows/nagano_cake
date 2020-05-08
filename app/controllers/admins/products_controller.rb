@@ -1,7 +1,9 @@
 class Admins::ProductsController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :user_block
 
   def top
-
+    @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order
   end
 
   def index
@@ -22,6 +24,8 @@ class Admins::ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       redirect_to admins_product_path(@product), notice: "商品登録完了！"
+    else
+      render "new"
     end
   end
 
@@ -34,13 +38,19 @@ class Admins::ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to admins_product_path(@product), notice: "商品編集完了！"
     else
-      render edit_admins_product_path
+      render "edit"
     end
   end
 
   private
   def product_params
-  	params.require(:product).permit(:genre_id, :name, :image_id, :description, :price, :is_active)
+  	params.require(:product).permit(:genre_id, :name, :image, :description, :price, :is_active)
+  end
+
+  def user_block
+    if user_signed_in?
+      redirect_to root_path
+    end
   end
 
 end

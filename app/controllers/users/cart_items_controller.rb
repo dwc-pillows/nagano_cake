@@ -1,4 +1,6 @@
 class Users::CartItemsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_block
 
   def index
     @cart_items = current_user.cart_items
@@ -45,6 +47,12 @@ class Users::CartItemsController < ApplicationController
 
   def cart_item_params
     params.require(:cart_item).permit(:user_id, :product_id, :amount)
+  end
+
+  def admin_block
+    if admin_signed_in?
+      redirect_to admins_path
+    end
   end
 
 end

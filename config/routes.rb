@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   }
 
   namespace :users do
-    resources :users, only: [:show, :withdraw_confirm, :withdraw, :edit, :update]
+    resources :users, only: [:show, :edit, :update]
+    get "/users", to: "users#withdraw_confirm", as: "withdraw_confirm"
+    patch "/users", to: "users#withdraw", as: "withdraw"
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :update, :destroy]
