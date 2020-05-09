@@ -36,9 +36,16 @@
                 <li class="nav-list-item">
                   <%= link_to "カート",users_cart_items_path %>
                 </li>
-                <li class="nav-list-item">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-                </li>
+                <%# 注文未確定の商品がある場合はログアウト表示しない %>
+                <% if current_user.unconfirmed_order? %>
+                  <li class="nav-list-item">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  </li>
+                <% else %>
+                  <li class="nav-list-item">
+                    <%= link_to "注文確定", users_confirmation_order_path(current_user.orders.order(created_at: :desc).take)%>
+                  </li>
+                <% end %>
               <% else %>
                 <li class="nav-list-item">
                   <%= link_to "商品一覧",users_products_path %>

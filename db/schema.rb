@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_030156) do
     t.integer "user_id", null: false
     t.integer "pay_method", default: 0, null: false
     t.integer "postage", default: 800, null: false
-    t.integer "total_price", null: false
+    t.integer "total_price", default: 0, null: false
     t.string "zip_code", null: false
     t.string "address", null: false
     t.string "name", null: false

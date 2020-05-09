@@ -26,4 +26,9 @@ class User < ApplicationRecord
     count
   end
 
+  # 最新の注文が確定済みかどうか
+  def unconfirmed_order?
+    latest_order = orders.order(created_at: :desc).take
+    latest_order.order_products.present?
+  end
 end

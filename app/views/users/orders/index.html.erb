@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <% @orders.each do |order| %>
-          <tr>
+          <tr class="text-center">
             <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
             <td>
               <%= order.zip_code %><br>
@@ -28,20 +28,26 @@
                 <%= order_product.product.name %><br>
               <% end %>
             </td>
-            <td><%= order.total_price.to_s(:delimited) %>円</td>
-            <td>
-              <% case order.order_status when 0 %>
-                <span class="badge" style="background: red;">入金待ち</span>
-              <% when 1 %>
-                <span class="badge" style="background: orange;">入金確認</span>
-              <% when 2 %>
-                <span class="badge" style="background: green;">制作中</span>
-              <% when 3 %>
-                <span class="badge" style="background: blue;">制作中</span>
-              <% when 3 %>
-              <% end %>
-            </td>
-            <td><%= link_to "表示する", users_order_path(order), class:"btn btn-primary"%></td>
+            <% if order.order_products.present? %>
+              <td><%= order.total_price.to_s(:delimited) %>円</td>
+              <td class="col-xs-1">
+                <% case order.order_status when 0 %>
+                  <span class="badge" style="background: red;">入金待ち</span>
+                <% when 1 %>
+                  <span class="badge" style="background: orange;">入金確認</span>
+                <% when 2 %>
+                  <span class="badge" style="background: green;">制作中</span>
+                <% when 3 %>
+                  <span class="badge" style="background: blue;">制作中</span>
+                <% when 3 %>
+                <% end %>
+              </td>
+              <td class="col-xs-1"><%= link_to "表示する", users_order_path(order), class:"btn btn-primary"%></td>
+            <% else %>
+              <td></td>
+              <td><span class="badge" style="background: red">未確定</span></td>
+              <td></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
