@@ -3,13 +3,13 @@ class Admins::OrdersController < ApplicationController
   before_action :user_block
 
   def index
-    @path = Rails.application.routes.recognize_path(request.referer)
+    path = Rails.application.routes.recognize_path(request.referer)
 
-    if @path[:controller] == "admins/products" && [:action] == "top"
+    if path[:controller] == "admins/products" && path[:action] == "top"
       @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order
       # 管理者用のトップページから遷移したら当日分のオーダー一覧を表示する
-    elsif @path[:controller] == "admins/users" && [:action] == "show"
-      @orders = Order.where("user_id = ?", request_referer[:id]).page(params[:page]).reverse_order
+    elsif path[:controller] == "admins/users" && path[:action] == "show"
+      @orders = Order.where("user_id = ?", path[:id]).page(params[:page]).reverse_order
       # 会員詳細から遷移したらユーザーのオーダー一覧を表示する
     else
       @orders = Order.page(params[:page]).reverse_order
@@ -18,14 +18,23 @@ class Admins::OrdersController < ApplicationController
   end
 
   def show
-
+    @order = Order.find(params[:id])
+    @order_products = @order.order_products
   end
 
   def update
-
+    @order = Order.find(params[:id])
+    @order.update(order_params)
+    flash[:notice] = "注文ステータスが変更されました"
+    redirect_to admins_order_path(@order)
   end
 
   private
+
+  def order_params
+    params.require(:order).permit(:order_status)
+  end
+
   def user_block
     if user_signed_in?
       redirect_to root_path
