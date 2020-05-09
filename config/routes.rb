@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :update, :destroy]
     delete '/cart_items', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
-    resources :orders, only: [:new, :create, :index, :show, :edit]
+    resources :orders
     # 注文確認画面
     get '/orders/:id/confirm', to: 'orders#confirmation',as: 'confirmation_order'
     # 注文確定アクション

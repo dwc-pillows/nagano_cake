@@ -1,4 +1,4 @@
-<%# 新規注文情報入力ページ %>
+<%# 注文情報編集ページ %>
 <div class="container">
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
@@ -38,15 +38,15 @@
             <table>
               <tr>
                 <td>郵便番号（ハイフンなし）</td>
-                <td><%= f.text_field :zip_code %></td>
+                <td><%= f.text_field :zip_code, value:nil %></td>
               </tr>
               <tr>
                 <td>住所</td>
-                <td><%= f.text_field :address %></td>
+                <td><%= f.text_field :address, value:nil %></td>
               </tr>
               <tr>
                 <td>宛名</td>
-                <td><%= f.text_field :name %></td>
+                <td><%= f.text_field :name, value:nil %></td>
               </tr>
             </table>
           </div>
