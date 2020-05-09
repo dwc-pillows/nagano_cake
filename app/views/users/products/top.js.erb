@@ -1,0 +1,4 @@
+<%# recommend_itemsのdiv内に部分テンプレート(_recommend_item)を追加する %>
+$('#recommend_items').append("<%= escape_javascript(render 'recommend_item', object: @products) %>");
+<%# 「もっと見る」ボタンを追加された商品の下に表示する %>
+$('#view_more').replaceWith("<%= escape_javascript(link_to_next_page(@products, 'もっと見る', remote: true, id: 'view_more')) %>");
