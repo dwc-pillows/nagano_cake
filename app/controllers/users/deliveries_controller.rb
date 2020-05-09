@@ -4,7 +4,7 @@ class Users::DeliveriesController < ApplicationController
 
   def index
     @delivery = Delivery.new
-    @deliveries = Delivery.all
+    @deliveries = current_user.deliveries
   end
 
   def create
@@ -14,17 +14,17 @@ class Users::DeliveriesController < ApplicationController
   end
 
   def edit
-    @delivery = Delivery.find(params[:id])
+    @delivery = current_user.deliveries.find(params[:id])
   end
 
   def update
-    @delivery = Delivery.find(params[:id])
+    @delivery = current_user.deliveries.find(params[:id])
     @delivery.update(delivery_params)
     redirect_to users_deliveries_path , notice: "配送先を更新しました！"
   end
 
   def destroy
-    @delivery = Delivery.find(params[:id])
+    @delivery = current_user.deliveries.find(params[:id])
   	@delivery.destroy
   	redirect_to users_deliveries_path , notice: "配送先を削除しました！"
   end
