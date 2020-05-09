@@ -24,7 +24,6 @@ class Users::OrdersController < ApplicationController
     else
     end
 
-    @order.total_price = 0
     @order.save
 
     redirect_to users_confirmation_order_path(@order)
