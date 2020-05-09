@@ -33,6 +33,15 @@ class Users::OrdersController < ApplicationController
   def confirmation
     @order = Order.find(params[:id])
     @cart_items = current_user.cart_items
+    @latest_order = current_user.orders.order(created_at: :desc).take
+  end
+
+# お届け先編集画面(GET)
+  def edit
+  end
+
+# お届け先情報更新(PATCH/PUT)
+  def update
   end
 
 # 注文確定アクション(POST)
@@ -73,7 +82,11 @@ class Users::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to root_path
+  end
 
   private
   def order_params

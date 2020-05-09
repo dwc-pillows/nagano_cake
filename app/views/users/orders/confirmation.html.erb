@@ -62,7 +62,9 @@
 
   <div class="row">
     <div class="text-center">
+    <%= link_to "お届け先を編集する", edit_users_order_path(@latest_order), class: "btn btn-primary" %>
     <%= link_to "購入を確定する", users_confirm_order_path(@order), method: :post, class:"btn btn-success" %>
+    <%= link_to "注文をやめる", users_order_path(@latest_order), method: :delete, class:"btn btn-danger"%>
     </div>
   </div>
 </div>
