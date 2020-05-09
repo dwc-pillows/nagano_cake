@@ -22,7 +22,6 @@ class Users::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     else
-      @delivery = current_user.deliveries.new
     end
 
     @order.total_price = 0
@@ -50,9 +49,14 @@ class Users::OrdersController < ApplicationController
           amount: cart_item.amount)
         @order_products.save!
       end
+      current_user.deliveries.create!(
+        zip_code: @order.zip_code,
+        address: @order.address,
+        name: @order.name
+      )
       current_user.cart_items.destroy_all
     end
-    redirect_to users_orders_thanks_path
+    redirect_to users_thanks_path
   end
 
 # サンクスページ(GET)
