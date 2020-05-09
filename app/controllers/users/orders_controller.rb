@@ -22,10 +22,13 @@ class Users::OrdersController < ApplicationController
       @order.address = @delivery.address
       @order.name = @delivery.name
     else
-      @delivery = current_user.deliveries.new
+      current_user.deliveries.create!(
+        zip_code: @order.zip_code,
+        address: @order.address,
+        name: @order.name
+      )
     end
 
-    @order.total_price = 0
     @order.save
 
     redirect_to users_confirmation_order_path(@order)
@@ -35,6 +38,44 @@ class Users::OrdersController < ApplicationController
   def confirmation
     @order = Order.find(params[:id])
     @cart_items = current_user.cart_items
+    @latest_order = current_user.orders.order(created_at: :desc).take
+  end
+
+# お届け先編集画面(GET)
+  def edit
+    @order = Order.find(params[:id])
+    @deliveries = current_user.deliveries
+  end
+
+# お届け先情報更新(PATCH/PUT)
+  def update
+    @order = Order.find(params[:id])
+    case params[:delivery_type]
+    when "0"
+      @order.update(
+      zip_code: current_user.zip_code,
+      address: current_user.address,
+      name: current_user.last_name + current_user.first_name
+      )
+    when "1"
+      @delivery = current_user.deliveries.find(params[:Delivery][:chosen_id])
+      @order.update(
+        zip_code: @delivery.zip_code,
+        address: @delivery.address,
+        name: @delivery.name
+      )
+    else
+      current_user.deliveries.create!(
+        zip_code: params[:order][:zip_code],
+        address: params[:order][:address],
+        name: params[:order][:name]
+      )
+      if @order.update(order_params)
+      else
+        flash[:notice] = "error:必要な情報が記載されていません。"
+      end
+    end
+    redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
   end
 
 # 注文確定アクション(POST)
@@ -52,7 +93,7 @@ class Users::OrdersController < ApplicationController
       end
       current_user.cart_items.destroy_all
     end
-    redirect_to users_orders_thanks_path
+    redirect_to users_thanks_path
   end
 
 # サンクスページ(GET)
@@ -70,7 +111,11 @@ class Users::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    redirect_to root_path
+  end
 
   private
   def order_params

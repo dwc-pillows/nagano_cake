@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]
     resources :cart_items, only: [:index, :create, :update, :destroy]
     delete '/cart_items', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
-    resources :orders, only: [:new, :create, :index, :show]
+    resources :orders
     # 注文確認画面
     get '/orders/:id/confirm', to: 'orders#confirmation',as: 'confirmation_order'
     # 注文確定アクション
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit , :update]
     resources :orders, only: [:index, :show, :update]
-    resources :order_produts, only: [:update]
+    resources :order_products, only: [:update]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

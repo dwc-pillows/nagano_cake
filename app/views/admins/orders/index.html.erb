@@ -3,7 +3,7 @@
     <h2>注文履歴一覧</h2>
   </div>
   <div class="row">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
           <tr>
             <th>購入日時</th>
@@ -19,16 +19,17 @@
             <td><%= order.user.last_name + order.user.first_name %></td>
             <td><%= order.order_products.sum(:amount) %></td>
             <td>
-              <% case order.order_status when 0 %>
-                <span class="badge" style="background: red;">入金待ち</span>
-              <% when 1 %>
-                <span class="badge" style="background: orange;">入金確認</span>
-              <% when 2 %>
-                <span class="badge" style="background: green;">制作中</span>
-              <% when 3 %>
-                <span class="badge" style="background: blue;">制作中</span>
-              <% when 3 %>
-              <% end %>
+            <% case order.order_status when 0 %>
+              <span class="badge" style="background: red;">入金待ち</span>
+            <% when 1 %>
+              <span class="badge" style="background: orange;">入金確認</span>
+            <% when 2 %>
+              <span class="badge" style="background: green;">制作中</span>
+            <% when 3 %>
+              <span class="badge" style="background: blue;">発送準備中</span>
+            <% when 4 %>
+              <span class="badge">発送済</span>
+            <% end %>
             </td>
           </tr>
         <% end %>
