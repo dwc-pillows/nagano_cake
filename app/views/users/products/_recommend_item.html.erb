@@ -3,7 +3,7 @@
             <%= link_to  users_product_path(product) do %>
             <ul class="list-group-item">
             <%# 商品画像 %>
-            <li class="list-group-item"><%= attachment_image_tag(product, :image, :fill, 180, 120, fallback:"no_image.jpg", size: '180x120') %></li>
+            <li class="list-group-item"><%= attachment_image_tag(product, :image, :fill, 180, 120, fallback:"no_image.jpg", size: '130x90') %></li>
             <%# 商品名 %>
             <li class="list-group-item"><%=product.name%></li>
             <%# 商品価格 %>

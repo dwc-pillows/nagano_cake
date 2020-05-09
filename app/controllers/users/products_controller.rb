@@ -4,6 +4,7 @@ class Users::ProductsController < ApplicationController
   def top
     # オススメ商品を4つずつ表示する
     @products = Product.page(params[:page]).reverse_order.per(4)
+    @genres = Genre.all
   end
 
   def index
