@@ -4,6 +4,7 @@ class Users::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_user.cart_items
+    @latest_order = current_user.orders.order(created_at: :desc).take
   end
 
   def create
@@ -18,7 +19,7 @@ class Users::CartItemsController < ApplicationController
     @cart_item.update(cart_item_params)
     @user = User.find(current_user.id)
     @cart_items = current_user.cart_items
-    render :index
+    redirect_to users_cart_items_path
   end
 
   def destroy
