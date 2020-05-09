@@ -2,7 +2,8 @@ class Users::ProductsController < ApplicationController
   before_action :admin_block
 
   def top
-
+    # オススメ商品を4つずつ表示する
+    @products = Product.page(params[:page]).reverse_order.per(4)
   end
 
   def index
