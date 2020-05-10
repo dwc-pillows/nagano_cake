@@ -41,6 +41,10 @@
         <%= f.label :販売ステータス, class: "col-sm-3 control-label" %>
         <%= f.select :is_active, [["売切れ", false],["販売中", true]], include_blank: '--選択してください--', class: "col-xs-8" %>  
       </div>
+      <div class="form-group">
+        <%= f.label :オススメ, class: "col-sm-3 control-label" %>
+        <%= f.select :recommend, [["通常", false],["オススメ", true]], include_blank: '--選択してください--', class: "col-xs-8" %>  
+      </div>
     </div>
   </div>
  
