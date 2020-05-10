@@ -13,6 +13,7 @@
           <td>税抜価格</td>
           <td>ジャンル</td>
           <td>ステータス</td>
+          <td>オススメ表示</td>
         </tr>
       </thead>
 
@@ -27,6 +28,7 @@
             <td><%= product.price %></td>
             <td><%= product.genre.name %></td>
             <td><%= product.is_active ? '販売中' : '売り切れ' %></td>
+            <td><%= product.recommend ? 'オススメ' : '通常' %></td>
           </tr>
         <% end %>
       </tbody>
