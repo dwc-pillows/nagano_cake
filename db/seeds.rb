@@ -113,3 +113,11 @@ end
 OrderProduct.all.each do |order_product|
   order_product.update(taxed_product_price: order_product.product.taxed_price)
 end
+
+Order.all.each do |order|
+  total = 0
+  order.order_products.each do |order_product|
+    total = order_product.subtotal
+  end
+  Order.update(total_price: total + order.postage)
+end
