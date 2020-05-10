@@ -3,11 +3,11 @@
     <div class="panel-heading">
       <h4>ジャンル検索</h4>
     </div>
-    
+
     <% genres.each do |genre|%>
       <ul class="list-group">
-      <%= link_to  users_products_path do %>
-        <li class="list-group-item"> <%=genre.name%></li>
+      <% if genre.is_active = true %>
+        <%= link_to genre.name, users_products_search_path(genre) %>
       <% end %>
       </ul>
     <% end %>

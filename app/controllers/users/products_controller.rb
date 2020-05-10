@@ -1,15 +1,21 @@
 class Users::ProductsController < ApplicationController
   before_action :admin_block
+  before_action :set_genre, only: [:top, :index, :search]
 
   def top
     # オススメ商品を4つずつ表示する
     @products = Product.where(recommend: 'true').page(params[:page]).reverse_order.per(4)
-    @genres = Genre.all
   end
 
   def index
     # currentuserのカート内の商品個数記載お願いします。
     @products = Product.all.page(params[:page])
+  end
+
+  def search
+    genre = Genre.find(params[:id])
+    @products = Product.where(genre_id: genre).page(params[:page])
+    render "index"
   end
 
   def show
@@ -30,6 +36,10 @@ class Users::ProductsController < ApplicationController
   end
 
   private
+
+  def set_genre
+    @genres = Genre.all
+  end
 
   def admin_block
     if admin_signed_in?
