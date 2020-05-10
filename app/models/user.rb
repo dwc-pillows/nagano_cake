@@ -8,6 +8,15 @@ class User < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :deliveries, dependent: :destroy
 
+
+  # バリデーション
+  validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }   # 全角カタカナ
+  validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }   # 全角カタカナ
+  validates :zip_code, format: { with: /\A\d{7}\z/ }   # 郵便番号（ハイフンなし7桁）
+  validates :phone_number, format: { with: /\A\d{10,11}\z/ }  # 電話番号(ハイフンなし10桁or11桁)
+  validates :email, format: { with: /\A\S+@\S+\.\S+\z/ }  # メールアドレス
+  
+
   # カート商品合計金額（小計の合計）
   def cart_items_sum
     total = 0
