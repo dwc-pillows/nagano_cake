@@ -7,7 +7,7 @@ class Users::ProductsController < ApplicationController
 
   def index
     # currentuserのカート内の商品個数記載お願いします。
-    @products = Product.all
+    @products = Product.all.page(params[:page])
   end
 
   def show

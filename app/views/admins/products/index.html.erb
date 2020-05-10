@@ -5,7 +5,7 @@
       <div class="row text-right">
         <%= link_to "+", new_admins_product_path, class: "btn btn-primary rounded-circle text-right ml-auto shadow-sm" %>
       </div>
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr class="active">
           <td>商品ID</td>
@@ -31,5 +31,6 @@
         <% end %>
       </tbody>
     </table>
+    <div align="center"><%= paginate @products, class: "gaginate" %></div>
   </div>
 </div>

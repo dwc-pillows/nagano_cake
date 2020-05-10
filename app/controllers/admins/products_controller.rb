@@ -3,11 +3,11 @@ class Admins::ProductsController < ApplicationController
   before_action :user_block
 
   def top
-    @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order
+    @orders = Order.where("created_at = ?", Date.today)
   end
 
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).per(10)
 
   end
 
@@ -15,7 +15,7 @@ class Admins::ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
   end
-  
+
   def new
     @product = Product.new
   end
@@ -23,7 +23,7 @@ class Admins::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to admins_product_path(@product), notice: "商品登録完了！"
+      redirect_to admins_product_path(@product), notice: "商品を登録しました"
     else
       render "new"
     end
@@ -36,7 +36,7 @@ class Admins::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to admins_product_path(@product), notice: "商品編集完了！"
+      redirect_to admins_product_path(@product), notice: "商品情報を更新しました"
     else
       render "edit"
     end
