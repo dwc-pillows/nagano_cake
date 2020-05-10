@@ -12,5 +12,6 @@
             商品名:<%= product.name %><br>
             <%= product.price %>円<br>
         <% end %>
+        <%= paginate @products, class: "gaginate" %>
     </div>
 </div>
