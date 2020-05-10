@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
-      <table class="table table-borderless">
+      <table class="table table-bordered">
         <thead>
           <tr class="active">
             <td><strong>会員ID</strong></td>
@@ -35,6 +35,7 @@
           <% end %>
         </tbody>
       </table>
+      <%= paginate @users, class: "gaginate" %>
     </div>
   </div>
 </div>

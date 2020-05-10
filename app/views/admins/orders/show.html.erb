@@ -1,18 +1,20 @@
 <div class="container">
   <div class="row">
-    <h2>注文履歴詳細</h2>
+    <div class="col-xs-8 col-xs-offset-2">
+      <h2>注文履歴詳細</h2>
+    </div>
   </div>
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-7">
       <table class="table table-bordered">
         <tr>
-          <th>購入者</th>
+          <th class="col-xs-3">購入者</th>
           <td><%= @order.user.last_name + ' ' + @order.user.first_name %></td>
         </tr>
         <tr>
           <th>配送先</th>
           <td>
-            <%= @order.zip_code + " " + @order.address %><br>
+            <%= "〒" + @order.zip_code.to_s.insert(3, "-") + "　　" + @order.address %><br>
             <%= @order.name %>
           </td>
         </tr>
@@ -36,12 +38,11 @@
     <div class="col-xs-8">
       <table class="table table-bordered">
         <tr>
-          <th>商品名</th>
-          <th>単価(税込)</th>
-          <th>数量</th>
-          <th>小計</th>
-          <th>制作ステータス</th>
-          <th></th>
+          <th class="col-xs-3">商品名</th>
+          <th class="col-xs-2">単価(税込)</th>
+          <th class="col-xs-1">数量</th>
+          <th class="col-xs-2">小計</th>
+          <th class="col-xs-4">制作ステータス</th>
         </tr>
         <% @order_products.each do |order_product| %>
           <tr>
@@ -52,8 +53,6 @@
             <%= form_for [:admins, order_product] do |f| %>
               <td>
                 <%= f.select :production_status, [["着手不可",0],["制作待ち",1],["制作中",2],["制作完了",3]] %>
-              </td>
-              <td>
                 <%= f.submit '更新', class:"btn btn-success" %>
               </td>
             <% end %>
@@ -62,20 +61,21 @@
       </table>
     </div>
     <div class="col-xs-1"></div>
-    <div class="col-xs-3">
-      <table class="table table-bordered">
-        <tr>
-          <th>商品合計</th>
-          <td class="text-right"><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
-        </tr>
-        <tr>
-          <th>送料</th>
-          <td class="text-right"><%= @order.postage.to_s(:delimited) %>円</td>
-        </tr>
-        <tr>
-          <th>請求合計金額</th>
-          <td class="text-right"><%= @order.total_price.to_s(:delimited) %>円</td>
-        </tr>
-      </table>
-  </>
+      <div class="col-xs-3">
+          <table class="table table-bordered">
+            <tr>
+              <th>商品合計</th>
+              <td class="text-right"><%= (@order.total_price - @order.postage).to_s(:delimited) %>円</td>
+            </tr>
+            <tr>
+              <th>送料</th>
+              <td class="text-right"><%= @order.postage.to_s(:delimited) %>円</td>
+            </tr>
+            <tr>
+              <th>請求合計金額</th>
+              <td class="text-right"><%= @order.total_price.to_s(:delimited) %>円</td>
+            </tr>
+          </table>
+      </div>
+  </div>
 </div>

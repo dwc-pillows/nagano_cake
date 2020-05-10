@@ -1,39 +1,44 @@
 <div class="container">
   <div class="row">
-    <h2>注文履歴一覧</h2>
-  </div>
+    <div class="col-xs-8 col-xs-offset-2">
+      <h2>注文履歴一覧</h2>
+    </div>
+  </>
   <div class="row">
-    <table class="table table-bordered">
-      <thead>
-          <tr>
-            <th>購入日時</th>
-            <th>購入者</th>
-            <th>注文個数</th>
-            <th>注文ステータス</th>
-          </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"),admins_order_path(order)  %></td>
-            <td><%= order.user.last_name + order.user.first_name %></td>
-            <td><%= order.order_products.sum(:amount) %></td>
-            <td>
-            <% case order.order_status when 0 %>
-              <span class="badge" style="background: red;">入金待ち</span>
-            <% when 1 %>
-              <span class="badge" style="background: orange;">入金確認</span>
-            <% when 2 %>
-              <span class="badge" style="background: green;">制作中</span>
-            <% when 3 %>
-              <span class="badge" style="background: blue;">発送準備中</span>
-            <% when 4 %>
-              <span class="badge" style="background: gray;">発送済み</span>
-            <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="col-xs-8 col-xs-offset-2">
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+              <th>購入日時</th>
+              <th>購入者</th>
+              <th>注文個数</th>
+              <th>注文ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"),admins_order_path(order)  %></td>
+              <td><%= order.user.last_name + order.user.first_name %></td>
+              <td><%= order.order_products.sum(:amount) %></td>
+              <td>
+              <% case order.order_status when 0 %>
+                <span class="badge" style="background: red;">入金待ち</span>
+              <% when 1 %>
+                <span class="badge" style="background: orange;">入金確認</span>
+              <% when 2 %>
+                <span class="badge" style="background: green;">制作中</span>
+              <% when 3 %>
+                <span class="badge" style="background: blue;">発送準備中</span>
+              <% when 4 %>
+                <span class="badge" style="background: gray;">発送済</span>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div align="center"><%= paginate @orders, class: "gaginate" %></div>
+    </div>
   </div>
 </div>
