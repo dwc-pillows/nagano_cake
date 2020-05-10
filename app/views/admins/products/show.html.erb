@@ -1,50 +1,49 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-      <h2>商品詳細</h2>
+      <h2 class="col-xs-offset-2" style="margin-bottom: 50px;">商品詳細</h2>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-4">
-      <%= attachment_image_tag(@product, :image, :fill, 40, 40, fallback:"no_image.jpg", size: '40x40') %>
+      <%= attachment_image_tag(@product, :image, :fill, 300, 200, fallback:"no_image.jpg", size: '300x200') %>
     </div>
-    <div class="col-xs-4">
-      <table class="table table-borderless">
-        <tbody>
-          <tr>
-            <td>商品名</td>
-            <td><strong><%= @product.name %></strong></td>
-          </tr>
-          <tr>
-            <td>商品説明</td>
-            <td><strong><%= @product.description %></strong></td>
-          </tr>
-          <tr>
-            <td>ジャンル</td>
-            <td><strong><%= @product.genre.name %></strong></td>
-          </tr>
-          <tr>
-            <td>税込価格（税抜価格）</td>
-            <td><strong><%= (@product.price * 1.1).floor %>（<%= @product.price %>）</strong> 円</td>
-          </tr>
-          <tr>
-            <td>販売ステータス</td>
-            <td><%= @product.is_active ? '販売中' : '売り切れ' %></td>
-          </tr>
-          <tr>
-            <td>オススメ表示</td>
-            <td><%= @product.recommend ? 'オススメ' : '通常' %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-9"></div>
-      <div class="col-xs-2">
-        <%= link_to "編集する", edit_admins_product_path(@product), class:"btn btn-primary" %>
+    <div class="col-xs-5 col-xs-offset-1">
+      <div class="form-group">
+        <p class="col-xs-5">商品名</p>
+        <strong><%= @product.name %></strong>
       </div>
-    </div>
 
+      <div class="form-group">
+        <p class="col-xs-5">商品説明</p>
+        <strong><%= @product.description %></strong>
+      </div>
+
+      <div class="form-group">
+        <p class="col-xs-5">ジャンル</p>
+        <strong><%= @product.genre.name %></strong>
+      </div>
+
+      <div class="form-group">
+        <p class="col-xs-5">税込価格(税抜価格)</p>
+        <strong><%= @product.taxed_price.floor %>（<%= @product.price %>） 円</strong>
+      </div>
+
+      <div class="form-group">
+        <p class="col-xs-5">販売ステータス</p>
+        <strong><%= @product.is_active ? '販売中' : '売り切れ' %></strong>
+      </div>
+
+      <div class="form-group">
+        <p class="col-xs-5">オススメ表示</p>
+        <strong><%= @product.recommend ? 'オススメ' : '通常' %></strong>
+      </div>
+
+    </div>
   </div>
+
+  <div class="row field text-right form-group">
+      <%= link_to "編集する", edit_admins_product_path(@product), class:"btn btn-primary" %>
+  </div>
+
 </div>
