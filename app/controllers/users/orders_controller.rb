@@ -90,6 +90,7 @@ class Users::OrdersController < ApplicationController
           taxed_product_price: cart_item.product.taxed_price,
           amount: cart_item.amount)
         @order_products.save!
+        @order.update(total_price: sum_price(@order))
       end
       current_user.cart_items.destroy_all
     end
@@ -122,7 +123,14 @@ class Users::OrdersController < ApplicationController
     params.require(:order).permit(:user_id, :pay_method, :zip_code, :address, :name)
   end
 
-  private
+# 注文の請求合計金額計算
+  def sum_price(order)
+    total = 0
+    order.order_products.each do |order_product|
+      total += order_product.subtotal
+    end
+    total + order.postage
+  end
 
   def admin_block
     if admin_signed_in?
