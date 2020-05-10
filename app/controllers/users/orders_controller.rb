@@ -55,27 +55,36 @@ class Users::OrdersController < ApplicationController
       @order.update(
       zip_code: current_user.zip_code,
       address: current_user.address,
-      name: current_user.last_name + current_user.first_name
+      name: current_user.last_name + current_user.first_name,
+      pay_method: params[:order][:pay_method]
       )
+      redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
     when "1"
       @delivery = current_user.deliveries.find(params[:Delivery][:chosen_id])
       @order.update(
         zip_code: @delivery.zip_code,
         address: @delivery.address,
-        name: @delivery.name
+        name: @delivery.name,
+        pay_method: params[:order][:pay_method]
       )
-    else
-      current_user.deliveries.create!(
-        zip_code: params[:order][:zip_code],
-        address: params[:order][:address],
-        name: params[:order][:name]
-      )
+      redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
+    when "2"
       if @order.update(order_params)
+        current_user.deliveries.create!(
+          zip_code: params[:order][:zip_code],
+          address: params[:order][:address],
+          name: params[:order][:name]
+        )
+        redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
       else
         flash[:notice] = "error:必要な情報が記載されていません。"
       end
+    # お届け先のラジオボタンが選択されていない時
+    else
+      flash[:notice] = "error:お届け先が選択されていません。"
+      @deliveries = current_user.deliveries
+      render "edit"
     end
-    redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
   end
 
 # 注文確定アクション(POST)
@@ -90,6 +99,7 @@ class Users::OrdersController < ApplicationController
           taxed_product_price: cart_item.product.taxed_price,
           amount: cart_item.amount)
         @order_products.save!
+        @order.update(total_price: sum_price(@order))
       end
       current_user.cart_items.destroy_all
     end
@@ -122,7 +132,14 @@ class Users::OrdersController < ApplicationController
     params.require(:order).permit(:user_id, :pay_method, :zip_code, :address, :name)
   end
 
-  private
+# 注文の請求合計金額計算
+  def sum_price(order)
+    total = 0
+    order.order_products.each do |order_product|
+      total += order_product.subtotal
+    end
+    total + order.postage
+  end
 
   def admin_block
     if admin_signed_in?
