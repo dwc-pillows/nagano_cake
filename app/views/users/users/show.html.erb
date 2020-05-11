@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2 class="col-xs-offset-3">マイページ</h2>
+    <h2 class="col-xs-offset-2">マイページ</h2>
   </div>
   <div class="row">
     <strong class="col-xs-offset-1">　 登録情報　</strong>
@@ -11,27 +11,27 @@
   　<div class="col-xs-6 col-xs-offset-1">
       <table class="table table-bordered">
         <tr>
-          <th class="col-xs-2">氏名</th>
+          <th class="col-xs-2 active">氏名</th>
           <td class="col-xs-4"><%= @user.last_name + "  " + @user.first_name %></td>
         </tr>
         <tr>
-          <th>カナ</th>
+          <th class="active">カナ</th>
           <td><%= @user.last_name_kana + "  " + @user.first_name_kana %></td>
         </tr>
         <tr>
-          <th>郵便番号</th>
+          <th class="active">郵便番号</th>
           <td><%= @user.zip_code %></td>
         </tr>
         <tr>
-          <th>住所</th>
+          <th class="active">住所</th>
           <td><%= @user.address %></td>
         </tr>
         <tr>
-          <th>電話番号</th>
+          <th class="active">電話番号</th>
           <td><%= @user.phone_number %></td>
         </tr>
         <tr>
-          <th>メールアドレス</th>
+          <th class="active">メールアドレス</th>
           <td><%= @user.email %></td>
         </tr>
       </table>
