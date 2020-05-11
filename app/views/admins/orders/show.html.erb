@@ -26,7 +26,7 @@
           <th>注文ステータス</th>
           <%= form_for [:admins, @order] do |f| %>
             <td>
-              <%= f.select :order_status, [["入金待ち",0],["入金確認",1],["制作中",2],["発送準備中",3],["発送済み",4]] %>
+              <%= f.select :order_status, [["入金待ち",0],["入金確認",1],["製作中",2],["発送準備中",3],["発送済み",4]] %>
               <%= f.submit '更新', class:"btn btn-success" %>
             </td>
           <% end %>
@@ -42,7 +42,7 @@
           <th class="col-xs-2">単価(税込)</th>
           <th class="col-xs-1">数量</th>
           <th class="col-xs-2">小計</th>
-          <th class="col-xs-4">制作ステータス</th>
+          <th class="col-xs-4">製作ステータス</th>
         </tr>
         <% @order_products.each do |order_product| %>
           <tr>
@@ -52,7 +52,7 @@
             <td><%= order_product.subtotal.to_s(:delimited) %></td>
             <%= form_for [:admins, order_product] do |f| %>
               <td>
-                <%= f.select :production_status, [["着手不可",0],["制作待ち",1],["制作中",2],["制作完了",3]] %>
+                <%= f.select :production_status, [["着手不可",0],["製作待ち",1],["製作中",2],["製作完了",3]] %>
                 <%= f.submit '更新', class:"btn btn-success" %>
               </td>
             <% end %>

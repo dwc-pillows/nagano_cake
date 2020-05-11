@@ -5,7 +5,7 @@ class Admins::OrderProductsController < ApplicationController
   def update
     @order_products = OrderProduct.find(params[:id])
     @order_products.update(order_products_params)
-    flash[:notice] = "制作ステータスが変更されました"
+    flash[:notice] = "製作ステータスが変更されました"
     redirect_back(fallback_location: root_path)
   end
 
