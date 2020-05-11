@@ -1,70 +1,71 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h2>注文情報確認</h2>
+      <h2 class="col-xs-8 col-xs-offset-2">注文情報確認</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-7">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="active">
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td class="col-xs-5"><%= cart_item.product.name %></td><%# 商品名 %>
+              <td class="col-xs-2" align="right"><%= cart_item.product.taxed_price.to_s(:delimited) %></td><%# 単価(税込) %>
+              <td class="col-xs-2" align="center"><%= cart_item.amount %></td>
+              <td class="col-xs-2" align="right"><%= cart_item.subtotal.to_s(:delimited) %><%# 小計 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-3 col-xs-offset-1">
+      <table class="table table-bordered">
+        <tr>
+          <td class="active col-xs-6">送料</td>
+          <td align="right"><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td class="active">合計金額</td>
+          <td align="right"><%= current_user.cart_items_sum.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <td class="active">請求金額</td>
+          <td align="right"><%= (current_user.cart_items_sum + @order.postage).to_s(:delimited) %></td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <div class="row">
-        <div class="col-xs-8">
-          <table class="table table-bordered">
-            <thead>
-              <tr class="active">
-                <th>商品名</th>
-                <th>単価（税込）</th>
-                <th>数量</th>
-                <th>小計</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @cart_items.each do |cart_item| %>
-                <tr>
-                  <td class="col-xs-5"><%= cart_item.product.name %></td><%# 商品名 %>
-                  <td class="col-xs-2"><%= cart_item.product.taxed_price.to_s(:delimited) %></td><%# 単価(税込) %>
-                  <td class="col-xs-2"><%= cart_item.amount %></td>
-                  <td class="col-xs-2"><%= cart_item.subtotal.to_s(:delimited) %><%# 小計 %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-xs-2">
-          <table class="table table-bordered">
-            <tr>
-              <td class="active col-xs-6">送料</td>
-              <td><%= @order.postage %></td>
-            </tr>
-            <tr>
-              <td class="active">合計金額</td>
-              <td><%= current_user.cart_items_sum.to_s(:delimited) %></td>
-            </tr>
-            <tr>
-              <td class="active">請求金額</td>
-              <td><%= (current_user.cart_items_sum + @order.postage).to_s(:delimited) %></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <label>支払い方法</label><br>
-        <div class="col-xs-offset-1">
-          <%= @order.pay_method %><br>
-        </div>
-        <label>お届け先</label><br>
-        <div class="col-xs-offset-1">
+    <table class="input-table">
+      <tr>
+        <th class="pay-info">支払い方法</th>
+        <td class="pay-info"><%= @order.pay_method %></td>
+      </tr>
+      <tr>
+        <th class="pay-info">お届け先</th>
+        <td class="pay-info">
           <%= @order.zip_code %>　<%= @order.address %><br>
           <%= @order.name %>
-        </div>
-      </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="row">
     <div class="text-center">
-    <%= link_to "お届け先を編集する", edit_users_order_path(@latest_order), class: "btn btn-primary" %>
-    <%= link_to "購入を確定する", users_confirm_order_path(@order), method: :post, class:"btn btn-success" %>
-    <%= link_to "注文をやめる", users_order_path(@latest_order), method: :delete, class:"btn btn-danger"%>
+      <%= link_to "お届け先を編集する", edit_users_order_path(@latest_order), class: "btn btn-primary" %>
+      <%= link_to "購入を確定する", users_confirm_order_path(@order), method: :post, class:"btn btn-success" %>
+      <%= link_to "注文をやめる", users_order_path(@latest_order), method: :delete, class:"btn btn-danger"%>
     </div>
   </div>
+
 </div>

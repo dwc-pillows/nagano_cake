@@ -1,27 +1,27 @@
 <div class="container">
-  <h3>配送先登録/一覧</h3>
- 
+  <h2 class="col-xs-8 col-xs-offset-2">配送先登録／一覧</h2>
+
   <div class="row">
-    <table>
+    <table class="input-table">
       <tbody>
         <%= form_for [:users, @delivery] do |f| %>
           <div class="field">
             <tr>
-              <td><p>郵便番号(ハイフンなし)</p></td>
+              <td>郵便番号(ハイフンなし)</td>
               <td><%= f.text_field :zip_code %></td>
             </tr>
           </div>
           <div class="field">
             <tr>
-              <td><p>住所</p></td>
-              <td><%= f.text_field :address %></td>
+              <td>住所</td>
+              <td><%= f.text_field :address, size: 50 %></td>
             </tr>
           </div>
           <div class="field">
             <tr>
-            <td><p>宛名</p></td>
-            <td><%= f.text_field :name %></td>
-            <td><%= f.submit '登録する'%></td>
+              <td>宛名</td>
+              <td><%= f.text_field :name %></td>
+              <td style="padding-left: 60px;"><%= f.submit '登録する', class: "btn btn-success" %></td>
             </tr>
           </div>
         <% end %>
@@ -30,29 +30,26 @@
   </div>
 
   <div class="row">
-    <table>
-      <tbody>
-        <tr>
-          <td><p>郵便番号</p></td>
-          <td><p>住所</p></td>
-          <td><p>宛名</p></td>
-          <td></td>
+    <div class="col-xs-7">
+      <table class="table table-bordered">
+        <tr class="active">
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th></th>
         </tr>
         <%@deliveries.each do |delivery|%>
           <tr>
             <td><%=delivery.zip_code%></td>
             <td><%=delivery.address%></td>
             <td><%=delivery.name%></td>
-						<td>
-              <%= link_to "編集する", edit_users_delivery_path(delivery), class: "btn-sm btn-success" %></td>
-            </td>
-						<td>
-              <%= link_to "削除する", users_delivery_path(delivery) , method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></td>
+            <td align="center">
+                <%= link_to "編集する", edit_users_delivery_path(delivery), class: "btn-sm btn-primary" %>
+                <%= link_to "削除する", users_delivery_path(delivery) , method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></td>
             </td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
+      </table>
   </div>
-  
+
 </div>
