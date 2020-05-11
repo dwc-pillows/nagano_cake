@@ -1,53 +1,48 @@
 <div class="container">
   <div class="row">
-    <h2 class="col-xs-offset-3">登録情報編集</h2>
+    <h2 class="col-xs-offset-2">登録情報編集</h2>
   </div>
   <%= form_for(@user, url:users_user_path(@user), method: :patch) do |f| %>
     <div class="row">
-    　<div class="col-xs-offset-1">
-        <table>
+      <div class="col-xs-offset-1">
+        <table class="input-table">
           <tr>
-            <th>名前</th>
-            <td>(姓)</td>
+            <th style="width: 150px;">名前</th>
+            <th style="text-align: right;">(姓)</th>
             <td><%= f.text_field :last_name,autofocus: true, size: 20 %><td>
-            <td>(名)</td>
+            <th style="text-align: right;">(名)</th>
             <td><%= f.text_field :first_name,autofocus: true, size: 20 %><td>
           </tr>
           <tr>
             <th>フリガナ</th>
-            <td>(セイ)</td>
+            <th style="text-align: right;">(セイ)</th>
             <td><%= f.text_field :last_name_kana,autofocus: true, size: 20 %><td>
-            <td>(メイ)</td>
+            <th style="text-align: right;">(メイ)</th>
             <td><%= f.text_field :first_name_kana,autofocus: true, size: 20 %><td>
           </tr>
           <tr>
-            <th>メールアドレス</th>
-            <td></td>
+            <th colspan="2">メールアドレス</th>
             <td><%= f.text_field :email,autofocus: true, size: 20 %><td>
           </tr>
           <tr>
-            <th>郵便番号(ハイフンなし)</th>
-            <td></td>
+            <th colspan="2">郵便番号(ハイフンなし)</th>
             <td><%= f.text_field :zip_code,autofocus: true, size: 20 %><td>
           </tr>
-        </table>
-        <table>
           <tr>
-            <th>住所</th>
-            <td></td>
-            <td><%= f.text_field :address,autofocus: true, size: 70 %><td>
+            <th colspan="2">住所</th>
+            <td><%= f.text_field :address,autofocus: true, size: 20 %><td>
           </tr>
           <tr>
-            <th>電話番号(ハイフンなし)</th>
-            <td></td>
+            <th colspan="2">電話番号(ハイフンなし)</th>
             <td><%= f.text_field :phone_number,autofocus: true, size: 20 %><td>
           </tr>
         </table>
       </div>
     </div>
+
     <div class="row">
-    　<div class="col-xs-4 col-xs-offset-3">
-        <%= f.submit "編集内容を保存する", class: "btn btn-primary" %>
+      <div class="col-xs-4 col-xs-offset-3">
+        <%= f.submit "編集内容を保存する", class: "btn btn-primary", style: "margin-right: 70px;" %>
         <%= link_to "退会する", users_withdraw_confirm_path, class: "btn btn-danger" %>
       </div>
     </div>
