@@ -38,8 +38,9 @@
                 <% when 2 %>
                   <span class="badge" style="background: green;">制作中</span>
                 <% when 3 %>
-                  <span class="badge" style="background: blue;">制作中</span>
-                <% when 3 %>
+                  <span class="badge" style="background: blue;">発送準備中</span>
+                <% when 4 %>
+                  <span class="badge" style="background: gray;">発送済み</span>
                 <% end %>
               </td>
               <td class="col-xs-1"><%= link_to "表示する", users_order_path(order), class:"btn btn-primary"%></td>

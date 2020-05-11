@@ -12,9 +12,9 @@ Admin.create(email: 'admin@admin.com', password: 'password')
 
 # user
 [
-  ['test1@test.com', 'てすと', 'ゆーざー1', 'テスト', 'ユーザー1', '1112222', '北海道', '11122223333'],
-  ['test2@test.com', 'てすと', 'ゆーざー2', 'テスト', 'ユーザー2', '3334444', '青森県', '44455556666'],
-  ['test3@test.com', 'てすと', 'ゆーざー3', 'テスト', 'ユーザー3', '5556666', '秋田県', '77788889999']
+  ['test1@test.com', 'てすと', '太郎', 'テスト', 'タロウ', '1112222', '北海道', '11122223333'],
+  ['test2@test.com', 'てすと', '花子', 'テスト', 'ハナコ', '3334444', '青森県', '44455556666'],
+  ['test3@test.com', 'てすと', '太子', 'テスト', 'タコ', '5556666', '秋田県', '77788889999']
 ].each do |email, first_name, last_name, first_name_kana, last_name_kana, zip_code, address, phone_number|
   User.create!(
     first_name: first_name,
@@ -112,4 +112,12 @@ end
 # order_productの支払い金額（taxed_product_priceを計算させる）
 OrderProduct.all.each do |order_product|
   order_product.update(taxed_product_price: order_product.product.taxed_price)
+end
+
+Order.all.each do |order|
+  total = 0
+  order.order_products.each do |order_product|
+    total = order_product.subtotal
+  end
+  Order.update(total_price: total + order.postage)
 end

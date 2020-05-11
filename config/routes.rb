@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     patch "/users", to: "users#withdraw", as: "withdraw"
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
     resources :products, only: [:index, :show]
+    get "search/:id", to: "products#search", as:"products_search"
     resources :cart_items, only: [:index, :create, :update, :destroy]
     delete '/cart_items', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
     resources :orders
