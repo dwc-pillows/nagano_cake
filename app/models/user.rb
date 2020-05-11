@@ -37,7 +37,9 @@ class User < ApplicationRecord
 
   # 最新の注文が確定済みかどうか
   def unconfirmed_order?
+    # .lastでも代用可（ただ今回の記述の方が拡張性が高い）
     latest_order = orders.order(created_at: :desc).take
-    latest_order.order_products.present?
+    # 現状だとdefの命名とtrue/falseが逆になっているので逆転させる
+    !latest_order.order_products.present?
   end
 end

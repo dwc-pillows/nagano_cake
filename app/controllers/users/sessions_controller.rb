@@ -3,7 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
 
   before_action :admin_block
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -22,10 +22,16 @@ class Users::SessionsController < Devise::SessionsController
 
   # protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  # emailを参照してユーザの特定した後にユーザのis_activeカラムをパラメータとして持ってくる
+  # 実際はauthentication_keysを変更した方が良さそうだが暫定でこのように実装する
+  def configure_sign_in_params
+    @user = User.find_by(email: params[:user][:email])
+    if @user.is_active?
+    else
+      flash[:notice] = "あなたは退会済みユーザです。"
+      redirect_to root_path
+    end
+  end
 
   private
 
