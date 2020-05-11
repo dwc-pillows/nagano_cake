@@ -11,11 +11,13 @@ class Users::ProductsController < ApplicationController
     # currentuserのカート内の商品個数記載お願いします。
     @products = Product.all.page(params[:page])
     @product_all = Product.all
+ 
   end
 
   def search
     genre = Genre.find(params[:id])
     @products = Product.where(genre_id: genre).page(params[:page])
+    @product_all = Product.where(genre_id: genre)
     render "index"
   end
 
