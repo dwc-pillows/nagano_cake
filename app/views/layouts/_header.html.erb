@@ -2,7 +2,13 @@
       <div class="container">
         <div class="row">
           <nav class="nav navbar-nav navbar-left">
-            <%= link_to "ながのCAKE", root_path, class:"store" %>
+            <%= link_to "ながのCAKE", root_path, class:"store" %><br>
+            <% if user_signed_in? && current_user.unconfirmed_order? %>
+              <%= link_to users_confirmation_order_path(current_user.orders.order(created_at: :desc).take) do %>
+                <span class="badge" style="background: orange">未確定注文あり</span>
+              <% end%>
+            <% else %>
+            <% end %>
           </nav>
           <nav class="nav navbar-nav navbar-right">
             <ul>
@@ -36,14 +42,17 @@
                 <li class="nav-list-item">
                   <%= link_to "カート",users_cart_items_path %>
                 </li>
-                <%# 注文未確定の商品がある場合はログアウト表示しない %>
+                <%# 注文未確定の商品がある場合はログアウトボタンを押した時にダイアログ、確定ページに飛ばす %>
                 <% if current_user.unconfirmed_order? %>
                   <li class="nav-list-item">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                    <%= link_to "ログアウト", users_confirmation_order_path(current_user.orders.order(created_at: :desc).take), data: {
+                      confirm: "OKを押した後注文を確定させるか破棄させた後再度ログアウトしてください。",
+                      cancel: "",
+                      commit: "OK"}, title: "未確定の注文があります。"%>
                   </li>
                 <% else %>
                   <li class="nav-list-item">
-                    <%= link_to "注文確定", users_confirmation_order_path(current_user.orders.order(created_at: :desc).take)%>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
                   </li>
                 <% end %>
               <% else %>

@@ -4,9 +4,6 @@ class Users::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_block
 
-  # 退会済ユーザーは入れない様にする
-  before_action :user_is_deleted
-
   def show
     # ログインしていないか、ユーザーIDが現在のIDと異なっている場合はメッセージ付でトップページへ返す
     unless current_user.nil? || current_user.id == @user.id
@@ -50,13 +47,6 @@ class Users::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :zip_code, :address, :phone_number, :is_active)
-  end
-
-  def user_is_deleted
-    if user_signed_in? && current_user.is_active == false
-      flash[:notice] = "退会済ユーザーアカウントです"
-      redirect_to root_path
-    end
   end
 
   def admin_block

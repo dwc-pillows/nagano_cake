@@ -102,7 +102,7 @@ Order.find_each do |order|
     product_id: Product.all.sample.id,
     taxed_product_price: 0,
     amount: rand(1..10),
-    production_status: rand(4)
+    production_status: 0
   )
   end
   # order_product/

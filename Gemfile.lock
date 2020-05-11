@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: 8cdb3f8a10b76e021b925b8a99fce853ffd6ac66
+  specs:
+    data-confirm-modal (1.6.3)
+      railties (>= 3.0)
+
+GIT
   remote: https://github.com/manfe/refile.git
   revision: 46b4178654e60bb5846b1423acf6d0740cdecc25
   specs:
@@ -272,6 +279,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  data-confirm-modal!
   devise
   jbuilder (~> 2.5)
   jquery-rails

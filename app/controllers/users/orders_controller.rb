@@ -124,6 +124,7 @@ class Users::OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
+    current_user.cart_items.destroy_all
     redirect_to root_path
   end
 
