@@ -1,26 +1,43 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <h2>会員の方はこちらからログイン</h2>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="row center-block">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
+        <div class="form-group">
+          <div class="col-xs-2">
+            <%= f.label "メールアドレス" %>
+          </div>
+          <div class="col-xs-10">
+            <%= f.email_field :email, autocomplete: "email", :size => "60*60" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-2">
+            <%= f.label "パスワード" %>
+          </div>
+          <div class="col-xs-10">
+            <%= f.password_field :password, autocomplete: "current-password", :size => "60*60" %>
+          </div>
+          <div class="col-xs-3 col-xs-offset-4">
+            <%= render "users/shared/links" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.submit "ログイン", class: "col-xs-2 col-xs-offset-3 btn btn-primary" %>
+        </div>
+    <% end %>
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="row">
+    <h2>登録がお済みでない方</h2>
   </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+  <div class="row">
+    <h4><%= link_to  "こちら", new_user_registration_path %>   から新規登録行ってください。</h4>
+  </div>
+
+  
+</div>
