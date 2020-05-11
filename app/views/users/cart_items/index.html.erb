@@ -51,11 +51,11 @@
     <div class="text-center">
       <% if current_user.cart_items.present? %>
         <% if current_user.unconfirmed_order? %>
-          <%= link_to "情報入力に進む", new_users_order_path, class: "btn btn-success" %>
-        <% else %>
           <%= link_to "お届け先情報編集画面に進む", edit_users_order_path(@latest_order), class: "btn btn-primary"%>
           <%= link_to "注文確認画面に進む", users_confirmation_order_path(@latest_order), class: "btn btn-success" %>
           <%= link_to "注文をやめる", users_order_path(@latest_order), method: :delete, class:"btn btn-danger"%>
+        <% else %>
+          <%= link_to "情報入力に進む", new_users_order_path, class: "btn btn-success" %>
         <% end %>
       <% else %>
         カート内に商品は入っていません。
