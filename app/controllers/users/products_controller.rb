@@ -1,6 +1,6 @@
 class Users::ProductsController < ApplicationController
   before_action :admin_block
-  before_action :set_genre, only: [:top, :index, :search]
+  before_action :set_genre, only: [:top, :index, :show,:search]
 
   def top
     # オススメ商品を4つずつ表示する
@@ -10,6 +10,7 @@ class Users::ProductsController < ApplicationController
   def index
     # currentuserのカート内の商品個数記載お願いします。
     @products = Product.all.page(params[:page])
+    @product_all = Product.all
   end
 
   def search

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-3">
-            <% render 'users/products/genre_index' %>
+          <%= render 'users/products/search_bar', genres: @genres %>
         </div>
         <div class="col-xs-9">
             <%= attachment_image_tag(@product, :image, :fill, 40, 40, fallback:"no_image.jpg",size: '40x40') %><br>

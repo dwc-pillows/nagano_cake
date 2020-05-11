@@ -1,14 +1,16 @@
 <div class="row">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4>ジャンル検索</h4>
+      <h4><strong>ジャンル検索</strong></h4>
     </div>
 
     <% genres.each do |genre|%>
-      <ul class="list-group">
-      <% if genre.is_active = true %>
-        <%= link_to genre.name, users_products_search_path(genre) %>
-      <% end %>
+      <ul class="genre-list">
+        <li class="genre-list-item">
+          <% if genre.is_active = true %>
+            <%= link_to genre.name, users_products_search_path(genre) %>
+          <% end %>
+        </li>
       </ul>
     <% end %>
   </div>
