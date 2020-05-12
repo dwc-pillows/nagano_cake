@@ -10,7 +10,7 @@ class Users::DeliveriesController < ApplicationController
   def create
     @delivery = current_user.deliveries.new(delivery_params)
     @delivery.save
-    redirect_to users_deliveries_path , notice: "配送先を新規登録しました！"
+    redirect_to users_deliveries_path , notice: "配送先を新規登録しました"
   end
 
   def edit
@@ -20,13 +20,13 @@ class Users::DeliveriesController < ApplicationController
   def update
     @delivery = current_user.deliveries.find(params[:id])
     @delivery.update(delivery_params)
-    redirect_to users_deliveries_path , notice: "配送先を更新しました！"
+    redirect_to users_deliveries_path , notice: "配送先情報を更新しました"
   end
 
   def destroy
     @delivery = current_user.deliveries.find(params[:id])
   	@delivery.destroy
-  	redirect_to users_deliveries_path , notice: "配送先を削除しました！"
+  	redirect_to users_deliveries_path , notice: "配送先を削除しました"
   end
 
   def destroy_all

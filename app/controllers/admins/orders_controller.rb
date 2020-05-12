@@ -28,7 +28,7 @@ class Admins::OrdersController < ApplicationController
         order_product.update(production_status: 1)
       end
     end
-    flash[:notice] = "ステータスが変更されました"
+    flash[:notice] = "ステータスが更新されました"
     redirect_to admins_order_path(@order)
   end
 

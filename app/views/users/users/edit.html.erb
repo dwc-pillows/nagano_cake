@@ -2,41 +2,86 @@
   <div class="row">
     <h2 class="col-xs-offset-2">登録情報編集</h2>
   </div>
-  <%= form_for(@user, url:users_user_path(@user), method: :patch) do |f| %>
+  <%= form_for(@user, url:users_user_path(@user), method: :patch, html: { class: "form-horizontal" }) do |f| %>
     <div class="row">
-      <div class="col-xs-offset-1">
-        <table class="input-table">
-          <tr>
-            <th style="width: 150px;">名前</th>
-            <th style="text-align: right;">(姓)</th>
-            <td><%= f.text_field :last_name,autofocus: true, size: 20 %><td>
-            <th style="text-align: right;">(名)</th>
-            <td><%= f.text_field :first_name,autofocus: true, size: 20 %><td>
-          </tr>
-          <tr>
-            <th>フリガナ</th>
-            <th style="text-align: right;">(セイ)</th>
-            <td><%= f.text_field :last_name_kana,autofocus: true, size: 20 %><td>
-            <th style="text-align: right;">(メイ)</th>
-            <td><%= f.text_field :first_name_kana,autofocus: true, size: 20 %><td>
-          </tr>
-          <tr>
-            <th colspan="2">メールアドレス</th>
-            <td><%= f.text_field :email,autofocus: true, size: 20 %><td>
-          </tr>
-          <tr>
-            <th colspan="2">郵便番号(ハイフンなし)</th>
-            <td><%= f.text_field :zip_code,autofocus: true, size: 20 %><td>
-          </tr>
-          <tr>
-            <th colspan="2">住所</th>
-            <td><%= f.text_field :address,autofocus: true, size: 20 %><td>
-          </tr>
-          <tr>
-            <th colspan="2">電話番号(ハイフンなし)</th>
-            <td><%= f.text_field :phone_number,autofocus: true, size: 20 %><td>
-          </tr>
-        </table>
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label "名前" %>
+        </div>
+
+        <div class="col-xs-1 text-right">
+          <%= f.label "（姓）"%>
+        </div>
+
+        <div class="col-xs-2">
+          <%= f.text_field :last_name%>
+        </div>
+
+        <div class="col-xs-1 text-right">
+          <%= f.label "（名）"%>
+        </div>
+
+        <div class="col-xs-2">
+          <%= f.text_field :first_name%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= f.label "フリガナ"%>
+        </div>
+
+        <div class="col-xs-1 text-right">
+          <%= f.label "（セイ）"%>
+        </div>
+
+        <div class="col-xs-2">
+          <%= f.text_field :last_name_kana%>
+        </div>
+
+        <div class="col-xs-1 text-right">
+          <%= f.label "（メイ）"%>
+        </div
+        >
+        <div class="col-xs-2">
+          <%= f.text_field :first_name_kana%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-3">
+          <%= f.label "メールアドレス" %>
+        </div>
+        <div class="col-xs-9">
+          <%= f.email_field :email, autocomplete: "email" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-3">
+          <%= f.label "郵便番号（ハイフンなし）" %>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :zip_code %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-3">
+          <%= f.label "住所" %>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :address, :size => "63*63" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-3">
+          <%= f.label "電話番号（ハイフンなし）"%>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :phone_number %>
+        </div>
       </div>
     </div>
 

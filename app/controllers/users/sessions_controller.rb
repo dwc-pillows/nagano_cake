@@ -28,7 +28,7 @@ class Users::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user.is_active?
     else
-      flash[:notice] = "あなたは退会済みユーザです。"
+      flash[:notice] = "退会済みユーザのためログイン出来ません"
       redirect_to root_path
     end
   end

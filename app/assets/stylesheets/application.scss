@@ -17,7 +17,7 @@
 @import "bootstrap";
 
 header {
-  background-image: url(samplecake.jpg);
+  background-color: #eeeeee;
   height:100px;
   background-size: cover;
   background-position: center;
@@ -28,14 +28,21 @@ header {
   text-decoration: none;
   color: #181717;
   font-size: 40px;
+  line-height: 100px;
 }
 
-.nav-list-item {
-  text-decoration: none;
-  font-size: 20px;
-  line-style: none;
-  display: inline-block;
-  margin: 0 20px;
-  padding: 20px 0;
-  color: #181717;
+.admin-link {
+  margin-top: 15px;
+}
+
+.search-box {
+  margin: 10px 30px 0 0;
+}
+
+.user-link {
+  line-height: 100px;
+}
+
+.welcome-user {
+  padding-right: 20px;
 }

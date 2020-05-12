@@ -28,7 +28,7 @@ class Admins::GenresController < ApplicationController
   def update
     genre = Genre.find(params[:id])
     if genre.update(genre_params)
-      redirect_to admins_genres_path, notice: "ジャンル情報が修正されました"
+      redirect_to admins_genres_path, notice: "ジャンル情報が更新されました"
     else
       @genre = Genre.find(params[:id])
       flash[:notice] = "error：ジャンル名が入力されていません"

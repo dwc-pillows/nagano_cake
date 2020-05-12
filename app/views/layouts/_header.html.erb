@@ -1,73 +1,48 @@
-<header class="navbar navbar-info">
-      <div class="container">
-        <div class="row">
-          <nav class="nav navbar-nav navbar-left">
-            <%= link_to "ながのCAKE", root_path, class:"store" %><br>
-            <% if user_signed_in? && current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
-              <%= link_to users_confirmation_order_path(current_user.orders.last) do %>
-                <span class="badge" style="background: orange">未確定注文あり</span>
-              <% end%>
-            <% else %>
-            <% end %>
-          </nav>
-          <nav class="nav navbar-nav navbar-right">
-            <ul>
-              <% if admin_signed_in? %>
-                <li class="nav-list-item">
-                  <%= link_to "商品一覧", admins_products_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "会員一覧", admins_users_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "注文履歴一覧", admins_orders_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "ジャンル一覧", admins_genres_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-                </li>
-                <input type="text" class="form-control"  placeholder="Search">
-              <% elsif user_signed_in? %>
-                <li class="nav-list-item">
-                  <%= "ようこそ、" + current_user.last_name + current_user.first_name + "さん！" %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "マイページ", users_user_path(current_user.id) %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "商品一覧", users_products_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "カート",users_cart_items_path %>
-                </li>
-                <%# 注文未確定の商品がある場合はログアウトボタンを押した時にダイアログ、確定ページに飛ばす %>
-                <% if current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
-                  <li class="nav-list-item">
-                    <%= link_to "ログアウト", users_confirmation_order_path(current_user.orders.last), data: {
-                      confirm: "OKを押した後注文を確定させるか破棄させた後再度ログアウトしてください。",
-                      cancel: "",
-                      commit: "OK"}, title: "未確定の注文があります。"%>
-                  </li>
-                <% else %>
-                  <li class="nav-list-item">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-                  </li>
-                <% end %>
-              <% else %>
-                <li class="nav-list-item">
-                  <%= link_to "商品一覧",users_products_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "新規登録", new_user_registration_path %>
-                </li>
-                <li class="nav-list-item">
-                  <%= link_to "ログイン", new_user_session_path %>
-                </li>
-              <% end %>
-            </ul>
-          </nav>
-        </div>
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3 text-center">
+        <%= link_to "ながのCAKE", root_path, class:"store" %><br>
+        <% if user_signed_in? && current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
+          <%= link_to users_confirmation_order_path(current_user.orders.last) do %>
+            <span class="badge" style="background: orange">未確定注文あり</span>
+          <% end%>
+        <% end %>
       </div>
-    </header>
+      <div class="col-xs-9 text-right">
+        <% if admin_signed_in? %>
+        <div class="admin-link">
+          <%= link_to "商品一覧", admins_products_path, class:"btn btn-defalt", class:"btn btn-default" %>
+          <%= link_to "会員一覧", admins_users_path, class:"btn btn-defalt", class:"btn btn-default" %>
+          <%= link_to "注文履歴一覧", admins_orders_path, class:"btn btn-defalt", class:"btn btn-default" %>
+          <%= link_to "ジャンル一覧", admins_genres_path, class:"btn btn-defalt", class:"btn btn-default" %>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-default" %><br>
+          <input type="search" placeholder="Search" class="search-box">
+        </div>
+        <% elsif user_signed_in? %>
+        <div class="user-link">
+          <span class="welcome-user"><%= "ようこそ、" + current_user.last_name + current_user.first_name + "さん！" %></span>
+          <%= link_to "マイページ", users_user_path(current_user.id), class:"btn btn-default" %>
+          <%= link_to "商品一覧", users_products_path, class:"btn btn-default" %>
+          <%= link_to "カート",users_cart_items_path, class:"btn btn-default" %>
+          <%# 注文未確定の商品がある場合はログアウトボタンを押した時にダイアログ、確定ページに飛ばす %>
+          <% if current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
+            <%= link_to "ログアウト", users_confirmation_order_path(current_user.orders.last), data: {
+              confirm: "OKを押した後注文を確定させるか破棄させた後再度ログアウトしてください。",
+              cancel: "",
+              commit: "OK"}, title: "未確定の注文があります。", class:"btn btn-default" %>
+          <% else %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-default" %>
+          <% end %>
+        </div>
+        <% else %>
+        <div class="user-link">
+          <%= link_to "商品一覧",users_products_path, class:"btn btn-default" %>
+          <%= link_to "新規登録", new_user_registration_path, class:"btn btn-default" %>
+          <%= link_to "ログイン", new_user_session_path, class:"btn btn-default" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
