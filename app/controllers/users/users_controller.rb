@@ -34,7 +34,7 @@ class Users::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to users_user_path(@user)
     else
-      flash[:notice] = "入力内容に誤りがあります。確認してください"
+      flash[:notice] = "入力内容に誤りがあります"
       render :edit
     end
   end

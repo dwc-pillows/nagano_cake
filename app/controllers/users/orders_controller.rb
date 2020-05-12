@@ -77,11 +77,11 @@ class Users::OrdersController < ApplicationController
         )
         redirect_to users_confirmation_order_path(@order), notice: "お届け先情報が修正されました"
       else
-        flash[:notice] = "error:必要な情報が記載されていません。"
+        flash[:notice] = "error:必要な情報が記載されていません"
       end
     # お届け先のラジオボタンが選択されていない時
     else
-      flash[:notice] = "error:お届け先が選択されていません。"
+      flash[:notice] = "error:お届け先が選択されていません"
       @deliveries = current_user.deliveries
       render "edit"
     end
