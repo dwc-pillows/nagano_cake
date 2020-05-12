@@ -3,12 +3,11 @@ class Admins::ProductsController < ApplicationController
   before_action :user_block
 
   def top
-    @orders = Order.where("created_at = ?", Date.today)
+    @orders = Order.where(created_at: Date.today.in_time_zone.all_day)
   end
 
   def index
     @products = Product.page(params[:page]).per(10)
-
   end
 
   def show
