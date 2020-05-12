@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-xs-3 text-center">
         <%= link_to "ながのCAKE", root_path, class:"store" %><br>
-        <% if user_signed_in? && current_user.unconfirmed_order? %>
-          <%= link_to users_confirmation_order_path(current_user.orders.order(created_at: :desc).take) do %>
+        <% if user_signed_in? && current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
+          <%= link_to users_confirmation_order_path(current_user.orders.last) do %>
             <span class="badge" style="background: orange">未確定注文あり</span>
           <% end%>
         <% end %>
@@ -26,8 +26,8 @@
           <%= link_to "商品一覧", users_products_path, class:"btn btn-default" %>
           <%= link_to "カート",users_cart_items_path, class:"btn btn-default" %>
           <%# 注文未確定の商品がある場合はログアウトボタンを押した時にダイアログ、確定ページに飛ばす %>
-          <% if current_user.unconfirmed_order? %>
-            <%= link_to "ログアウト", users_confirmation_order_path(current_user.orders.order(created_at: :desc).take), data: {
+          <% if current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
+            <%= link_to "ログアウト", users_confirmation_order_path(current_user.orders.last), data: {
               confirm: "OKを押した後注文を確定させるか破棄させた後再度ログアウトしてください。",
               cancel: "",
               commit: "OK"}, title: "未確定の注文があります。", class:"btn btn-default" %>

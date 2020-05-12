@@ -46,13 +46,22 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-4">
-      <%= link_to "編集する", edit_admins_user_path(@user), class:"btn btn-primary" %>
-      <%= link_to "注文履歴一覧を見る", admins_orders_path, class:"btn btn-primary" %>
+      <div class="row">
+        <div class="text-center">
+          <%= link_to "編集する", edit_admins_user_path(@user), class:"btn btn-primary" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3">
+          <%= form_tag(admins_orders_path, method: :get) do %>
+            <%# 注文履歴一覧の対象を指定するためのparams %>
+            <%= hidden_field_tag :order_sort, 1 %>
+            <%= hidden_field_tag :user_id, @user.id %>
+            <%= submit_tag("注文履歴一覧を見る", class: "btn btn-primary", style:"margin-top: 15px")%>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

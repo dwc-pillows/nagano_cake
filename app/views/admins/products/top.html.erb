@@ -3,9 +3,12 @@
     <h2 class="col-xs-offset-2">管理者画面</h2>
   </div>
   <div class="row">
-    <h3>本日の注文件数
-      <%= link_to @orders.count, admins_orders_path, style:"margin-left: 20px;" %>
-    件</h3>
+    <h3>本日の注文件数</h3>
+      <%= form_tag(admins_orders_path, method: :get) do %>
+        <%# 注文履歴一覧の対象を指定するためのparams %>
+        <%= hidden_field_tag :order_sort, 0 %>
+        <%= submit_tag @orders.count, class:"col-xs-1" %>
+      <% end %>件
   </table>
   </div>
 </div>

@@ -3,17 +3,15 @@ class Admins::OrdersController < ApplicationController
   before_action :user_block
 
   def index
-    path = Rails.application.routes.recognize_path(request.referer)
-
-    if path[:controller] == "admins/products" && path[:action] == "top"
-      @orders = Order.where("created_at = ?", Date.today).page(params[:page]).reverse_order.per(10)
-      # 管理者用のトップページから遷移したら当日分のオーダー一覧を表示する
-    elsif path[:controller] == "admins/users" && path[:action] == "show"
-      @orders = Order.where("user_id = ?", path[:id]).page(params[:page]).reverse_order.per(10)
-      # 会員詳細から遷移したらユーザーのオーダー一覧を表示する
+    case params[:order_sort]
+    when "0"
+      @orders_today_all = Order.where(created_at: Date.today.in_time_zone.all_day)
+      @orders = @orders_today_all.page(params[:page]).reverse_order.per(10)
+    when "1"
+      @user = User.find(params[:user_id])
+      @orders = @user.orders.page(params[:page]).reverse_order.per(10)
     else
       @orders = Order.page(params[:page]).reverse_order.per(10)
-      # その他(ヘッダ)から遷移したら全てのオーダーを表示する
     end
   end
 
