@@ -23,7 +23,7 @@ class Admins::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to admins_product_path(@product), notice: "商品を登録しました"
+      redirect_to admins_product_path(@product), notice: "商品が新規登録されました"
     else
       render "new"
     end
@@ -36,7 +36,7 @@ class Admins::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to admins_product_path(@product), notice: "商品情報を更新しました"
+      redirect_to admins_product_path(@product), notice: "商品情報が更新されました"
     else
       render "edit"
     end
