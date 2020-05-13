@@ -17,8 +17,11 @@
             <%# 商品価格 %>
             <li class="list-group-item">
               ¥<%= product.price %>
+              <% if current_user.present? && @cart_items.find_by(product_id: product.id).present? %>
+                (<%= @cart_items.find_by(product_id: product.id).amount %>個)
+              <% end %>
               <% if !product.is_active? %>
-                <span class="badge" style="background: blue;">売り切れ</span>
+                <span class="badge" style="background: red;">売り切れ</span>
               <% end %>
             </li>
             </ul>
