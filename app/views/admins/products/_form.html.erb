@@ -28,10 +28,14 @@
         <%= f.label :販売ステータス, class: "col-sm-4 control-label" %>
         <%= f.select :is_active, [["売切れ", false],["販売中", true]], include_blank: '--選択してください--', class: "col-xs-7" %>
       </div>
+      <div class="form-group">
+        <%= f.label :おすすめ表示, class:"col-sm-4 control-label" %>
+        <%= f.select :recommend, [["しない", false],["する", true]], include_blank: '--選択してください--', class: "col-xs-7" %>
+      </div>
     </div>
   </div>
 
   <div class="row field text-right form-group">
-    <%= f.submit '新規登録ボタン', class: "btn btn-primary" %>
+    <%= f.submit '商品情報更新', class: "btn btn-primary" %>
   </div>
   <% end %>
