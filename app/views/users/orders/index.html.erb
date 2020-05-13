@@ -18,30 +18,14 @@
             <%= order.address %><br>
             <%= order.name %>
           </td>
-          <td style="vertical-align: middle;">
+          <td align="center" style="vertical-align: middle;">
             <% order.order_products.each do |order_product| %>
               <%= order_product.product.name %><br>
             <% end %>
           </td>
           <% if order.order_products.present? %>
-            <td style="vertical-align: middle;"><%= order.total_price.to_s(:delimited) %>円</td>
-            <td class="col-xs-1"  style="vertical-align: middle;">
-              <% case order.order_status when 0 %>
-                  <span class="badge" style="background: red;">入金待ち</span>
-              <% when 1 %>
-                <span class="badge" style="background: orange;">入金確認</span>
-              <% when 2 %>
-                <span class="badge" style="background: green;">制作中</span>
-              <% when 3 %>
-                <span class="badge" style="background: blue;">発送準備中</span>
-              <% when 4 %>
-                <span class="badge" style="background: gray;">発送済み</span>
-              <% end %>
-            </td>
-          <% end %>
-          <% if order.order_products.present? %>
-            <td><%= order.total_price.to_s(:delimited) %>円</td>
-            <td class="col-xs-1">
+            <td align="right"><%= order.total_price.to_s(:delimited) %>円</td>
+            <td class="col-xs-1" align="center">
               <% case order.order_status when 0 %>
                 <span class="badge" style="background: red;">入金待ち</span>
               <% when 1 %>
@@ -54,11 +38,11 @@
                 <span class="badge" style="background: gray;">発送済み</span>
               <% end %>
             </td>
-            <td class="col-xs-1"><%= link_to "表示する", users_order_path(order), class:"btn btn-primary"%></td>
+            <td class="col-xs-1" align="center"><%= link_to "表示する", users_order_path(order), class:"btn btn-primary" %></td>
           <% else %>
             <td></td>
-            <td><span class="badge" style="background: red">未確定</span></td>
-            <td></td>
+            <td align="center"><span class="badge" style="background: red">未確定</span></td>
+            <td class="col-xs-1" align="center"><%= link_to "確定する", users_confirmation_order_path(current_user.orders.last), class:"btn btn-success" %></td>
           <% end %>
         </tr>
       <% end %>

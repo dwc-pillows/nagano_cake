@@ -4,27 +4,27 @@ class Users::ProductsController < ApplicationController
 
   def top
     # オススメ商品を4つずつ表示する
-    @products = Product.where(recommend: 'true').page(params[:page]).reverse_order.per(4)
+    @products = active_products.where(recommend: true).page(params[:page]).reverse_order.per(4)
   end
 
   def index
     # currentuserのカート内の商品個数記載お願いします。
-    @products = Product.all.page(params[:page])
-    @product_all = Product.all
- 
+    @products = active_products.page(params[:page])
+    @product_all = active_products
+    @title = "商品一覧"
   end
 
   def search
     genre = Genre.find(params[:id])
-    @products = Product.where(genre_id: genre).page(params[:page])
-    @product_all = Product.where(genre_id: genre)
+    @products = active_products.where(genre_id: genre).page(params[:page])
+    @product_all = active_products.where(genre_id: genre)
+    @title = genre.name + "一覧"
     render "index"
   end
 
   def show
     @product = Product.find(params[:id])
     @cart_item = CartItem.new(product_id: @product.id)
-
     # ユーザーがログインしていない場合、itemsの内容を全商品とし、ログイン中はカートアイテムを対象にする
     if current_user.nil?
       items = CartItem.all
@@ -38,10 +38,14 @@ class Users::ProductsController < ApplicationController
     end
   end
 
+  def active_products
+    Product.joins(:genre).where(genres:{is_active:true}, is_active:true)
+  end
+
   private
 
   def set_genre
-    @genres = Genre.all
+    @genres = Genre.where(is_active:true)
   end
 
   def admin_block

@@ -18,10 +18,13 @@
         <tbody>
           <% @cart_items.each do |cart_item| %>
             <tr>
-              <td class="col-xs-5"><%= cart_item.product.name %></td><%# 商品名 %>
-              <td class="col-xs-2" align="right"><%= cart_item.product.taxed_price.to_s(:delimited) %></td><%# 単価(税込) %>
+              <td class="col-xs-5">
+                <%= attachment_image_tag(cart_item.product, :image, :fill, 60, 40, fallback:"no_image.jpg", size: '60x40') %>
+                <%= cart_item.product.name %>
+              </td><%# 商品名 %>
+              <td class="col-xs-2" align="right"><%= cart_item.product.taxed_price.to_s(:delimited) %>円</td><%# 単価(税込) %>
               <td class="col-xs-2" align="center"><%= cart_item.amount %></td>
-              <td class="col-xs-2" align="right"><%= cart_item.subtotal.to_s(:delimited) %><%# 小計 %></td>
+              <td class="col-xs-2" align="right"><%= cart_item.subtotal.to_s(:delimited) %>円<%# 小計 %></td>
             </tr>
           <% end %>
         </tbody>
@@ -31,15 +34,15 @@
       <table class="table table-bordered">
         <tr>
           <td class="active col-xs-6">送料</td>
-          <td align="right"><%= @order.postage %></td>
+          <td align="right"><%= @order.postage %>円</td>
         </tr>
         <tr>
           <td class="active">合計金額</td>
-          <td align="right"><%= current_user.cart_items_sum.to_s(:delimited) %></td>
+          <td align="right"><%= current_user.cart_items_sum.to_s(:delimited) %>円</td>
         </tr>
         <tr>
           <td class="active">請求金額</td>
-          <td align="right"><%= (current_user.cart_items_sum + @order.postage).to_s(:delimited) %></td>
+          <td align="right"><%= (current_user.cart_items_sum + @order.postage).to_s(:delimited) %>円</td>
         </tr>
       </table>
     </div>
