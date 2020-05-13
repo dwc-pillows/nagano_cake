@@ -20,8 +20,8 @@
             <tr>
               <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M:%S"),admins_order_path(order)  %></td>
               <td><%= order.user.last_name + order.user.first_name %></td>
-              <td><%= order.order_products.sum(:amount) %></td>
-              <td>
+              <td class="text-right"><%= order.order_products.sum(:amount) %>個</td>
+              <td class="col-xs-2 text-center">
               <% case order.order_status when 0 %>
                 <span class="badge" style="background: red;">入金待ち</span>
               <% when 1 %>

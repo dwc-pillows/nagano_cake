@@ -25,9 +25,9 @@
                   <u><%= product.name %></u>
                 <% end %>
             </td>
-            <td><%= product.price %></td>
-            <td><%= product.genre.name %></td>
-            <td><%= product.is_active ? '販売中' : '売り切れ' %></td>
+            <td class="text-right"><%= product.price %>円</td>
+            <td class="text-center"><%= product.genre.name %></td>
+            <td class="text-center"><%= product.is_active ? '販売中' : '売り切れ' %></td>
             <td><%= product.recommend ? 'オススメ' : '通常' %></td>
           </tr>
         <% end %>
