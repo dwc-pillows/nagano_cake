@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
+    get '/products/recommends', to: 'products#index_all', as: 'products_all'
+    post '/products/recommends', to: 'products#recommend', as: 'recommends'
     resources :products, only: [:index, :new, :show, :create, :edit, :update]
     get '', to: 'products#top'
     resources :genres, only: [:index, :create, :edit, :update]
