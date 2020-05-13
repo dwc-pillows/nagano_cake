@@ -7,16 +7,49 @@
 
 * 管理者側ページ
 
-## 標準機能
-fuctions_list.pdf 参照
 
-## 追加機能
+## 実装機能
+
+* 顧客ページ
+  * 会員登録・編集・退会
+  * 商品閲覧(一覧・詳細)・カートに入れる・注文
+  * 商品ジャンル検索
+  * 注文履歴確認
+
+* 管理者ページ
+  * 商品登録・編集
+  * 注文履歴確認（当日分・全ユーザ・ユーザ毎）
+  * 会員情報確認
 
 ## バージョン
 
 * Ruby 2.5.7
 
-* Rails 5.2.4 >= 5.2.4.2
+* Rails 5.2.4.2
+
+* SQLite3
+
+* HTML5
+
+* CSS3
+
+* Gem
+
+  * devise
+
+  * bootstrap3
+
+  * refile 
+
+  * refile-mini_magick
+
+  * kaminari
+
+  * jquery-rails
+
+  * data-confirm-modal
+
+  * pry-byebug
 
 ## 導入方法
 
@@ -30,4 +63,7 @@ $ rails db:seed
 $ rails s -b 0.0.0.0
 ```
 
-* ...
+管理者ページへのログイン<br>
+メールアドレス： admin@admin.com<br>
+パスワード： password
+
