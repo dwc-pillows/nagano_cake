@@ -3,13 +3,20 @@
     <div class="row">
       <div class="col-xs-3 text-center">
         <%= link_to "ながのCAKE", root_path, class:"store" %><br>
-        <% if user_signed_in? && current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
-          <%= link_to users_confirmation_order_path(current_user.orders.last) do %>
-            <span class="badge" style="background: orange">未確定注文あり</span>
-          <% end%>
-        <% end %>
       </div>
-      <div class="col-xs-9 text-right">
+      <div class="col-xs-4 text-right">
+        <div class="welcome-user">
+        <% if user_signed_in? %>
+          <%= "ようこそ、" + current_user.last_name + current_user.first_name + "さん！" %><br>
+          <% if user_signed_in? && current_user.unconfirmed_order? && !current_user.orders.last.id.nil? %>
+            <%= link_to users_confirmation_order_path(current_user.orders.last) do %>
+              <div class="badge order-check" style="background: orange">未確定の注文があります</div>
+            <% end %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+      <div class="col-xs-5 text-right">
         <% if admin_signed_in? %>
         <div class="admin-link">
           <%= link_to "商品一覧", admins_products_path, class:"btn btn-defalt", class:"btn btn-default" %>
@@ -21,7 +28,6 @@
         </div>
         <% elsif user_signed_in? %>
         <div class="user-link">
-          <span class="welcome-user"><%= "ようこそ、" + current_user.last_name + current_user.first_name + "さん！" %></span>
           <%= link_to "マイページ", users_user_path(current_user.id), class:"btn btn-default" %>
           <%= link_to "商品一覧", users_products_path, class:"btn btn-default" %>
           <%= link_to "カート",users_cart_items_path, class:"btn btn-default" %>
