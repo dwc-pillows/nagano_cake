@@ -3,7 +3,7 @@
         <%= render 'users/products/search_bar', genres: @genres %>
     </div>
     <div class="col-xs-9">
-        <h1>商品一覧</h1>
+        <h1><%= @title %></h1>
         <p>（全<%= @product_all.count %> 件）</p>
       
       <div class="list-group">
