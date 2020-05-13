@@ -22,16 +22,19 @@
         <tbody>
           <% @cart_items.each do |cart_item| %>
             <tr>
-              <td class="col-xs-5"><%= cart_item.product.name %></td><%# 商品名 %>
-              <td class="col-xs-2"><%= cart_item.product.taxed_price.to_s(:delimited) %></td><%# 単価(税込) %>
-              <td class="col-xs-2">
+              <td class="col-xs-5">
+                <%= attachment_image_tag(cart_item.product, :image, :fill, 60, 40, fallback:"no_image.jpg", size: '60x40') %>
+                <%= cart_item.product.name %>
+              </td><%# 商品名 %>
+              <td class="col-xs-2" align="right"><%= cart_item.product.taxed_price.to_s(:delimited) %>円</td><%# 単価(税込) %>
+              <td class="col-xs-2" align="center">
                 <%= form_for [:users, cart_item] do |f| %>
                   <%= f.select :amount,(1..10).to_a %>
                   <%= f.submit "変更", class:"btn btn-primary" %>
                 <% end %>
               </td>
-              <td class="col-xs-2">
-                <%= (cart_item.product.taxed_price * cart_item.amount).to_s(:delimited) %><%# 小計 %>
+              <td class="col-xs-2" align="right">
+                <%= (cart_item.product.taxed_price * cart_item.amount).to_s(:delimited) %>円<%# 小計 %>
               </td>
               <td class="col-xs-1"><%= link_to "削除する", users_cart_item_path(cart_item.id), method: :delete, class:"btn btn-danger" %></td>
           　</tr>
