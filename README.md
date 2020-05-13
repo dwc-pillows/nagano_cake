@@ -1,8 +1,16 @@
 # NaganoCake
+長野県にある洋菓子店「ながのCAKE」の商品を販売するECサイト
 
-## 実装機能
+## 仕様
 
-Things you may want to cover:
+* 顧客側ページ
+
+* 管理者側ページ
+
+## 標準機能
+
+
+
 
 * Ruby version
 
