@@ -58,7 +58,11 @@ $ git clone git@github.com:dwc-pillows/nagano_cake.git
 
 $ cd nagano_cake
 
+$ rails db:migrate
+
 $ rails db:seed
+
+$ bundle install
 
 $ rails s -b 0.0.0.0
 ```
@@ -67,3 +71,8 @@ $ rails s -b 0.0.0.0
 メールアドレス： admin@admin.com<br>
 パスワード： password
 
+テスト用デフォルトユーザー3人<br>
+メールアドレス： test1@test.com/test2@test.com/test3@test.com
+パスワード： password
+
+上記のコマンド入力後 http://localhost:3000/ をお使いのブラウザに入力してアクセスしてください。
