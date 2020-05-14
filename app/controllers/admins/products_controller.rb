@@ -10,6 +10,20 @@ class Admins::ProductsController < ApplicationController
     @products = Product.page(params[:page]).per(10)
   end
 
+  def index_all
+    @products = Product.all
+  end
+
+  def recommend
+    @products = Product.all
+    # 現状paramsの持たせ方、取得法が非常に汚いのでいつか改善
+    @products.each do |product|
+      product.update(recommend: params["#{product.id}"][:recommend])
+    end
+    flash[:notice] = "おすすめ情報を更新しました。"
+    redirect_to admins_products_path
+  end
+
   def show
     @product = Product.find(params[:id])
 
@@ -53,3 +67,7 @@ class Admins::ProductsController < ApplicationController
   end
 
 end
+
+
+
+
