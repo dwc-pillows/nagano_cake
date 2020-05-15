@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
+    <%= alert %>
     <div class="col-xs-8 col-xs-offset-2">
       <h3 class="form-group">管理者ログイン</h3>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
-      <%= alert %>
 
         <div class="form-group">
           <%= f.label :メールアドレス, class: "col-xs-4 control-label" %>

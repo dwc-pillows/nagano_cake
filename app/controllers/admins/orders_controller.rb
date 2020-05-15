@@ -6,12 +6,12 @@ class Admins::OrdersController < ApplicationController
     case params[:order_sort]
     when "0"
       @orders_today_all = Order.where(created_at: Date.today.in_time_zone.all_day)
-      @orders = @orders_today_all.page(params[:page]).reverse_order.per(10)
+      @orders = @orders_today_all.order(created_at: :asc).page(params[:page]).reverse_order.per(10)
     when "1"
       @user = User.find(params[:user_id])
-      @orders = @user.orders.page(params[:page]).reverse_order.per(10)
+      @orders = @user.orders.order(created_at: :asc).page(params[:page]).reverse_order.per(10)
     else
-      @orders = Order.page(params[:page]).reverse_order.per(10)
+      @orders = Order.all.order(created_at: :asc).page(params[:page]).reverse_order.per(10)
     end
   end
 
